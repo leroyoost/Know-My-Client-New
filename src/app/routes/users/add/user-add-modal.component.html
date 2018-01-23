@@ -1,0 +1,128 @@
+<div class="modal-body">
+    <h3>Add New User</h3>
+    <div>
+        <fieldset>
+            <div class="form-group">
+                <br/>
+                <br/>
+                <label style="margin-top:8px" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-6">
+                    <input type="text" name="name" [(ngModel)]='newUser.name' class="form-control" />
+                </div>
+                <div class="col-sm-3"></div>
+                <br/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label style="margin-top:8px" class="col-sm-3 control-label">Surname</label>
+                <div class="col-sm-6">
+                    <input type="text" name="surname" [(ngModel)]='newUser.surname' class="form-control" />
+                </div>
+                <div class="col-sm-3"></div>
+                <br/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label style="margin-top:8px" class="col-sm-3 control-label">Email Address</label>
+                <div class="col-sm-6">
+                    <input type="text" name="email" [(ngModel)]='newUser.email' class="form-control" />
+                </div>
+                <div class="col-sm-3"></div>
+                <br/>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label style="margin-top:8px" class="col-sm-3 control-label">Company</label>
+                <div class="col-sm-6">
+                    <ng-select [allowClear]="false"
+                        [items]="companies | async"
+                        (selected)="selectCompany($event)"
+                        placeholder="No company selected">
+                    </ng-select>
+                </div>
+                <div class="col-sm-3"></div>
+                <br/>
+                <br/>
+            </div>
+        </fieldset>
+        <fieldset *ngIf="configItems as config">
+            <div class="row">
+                <div class="col-sm-3" *ngFor="let configItem of config | keys">
+                    <label>{{configItem | titleCase}}</label>
+                    <div class="table-responsive">
+                        <table class="table table-hover borderless">
+                            <tbody>
+                                <tr *ngFor="let menuItem of config[configItem]">
+                                    <td style="width:20px !important;">
+                                        <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input type="checkbox" [(ngModel)] = "menuItem.active" (change)="updateAccess(configItem)" />
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="p0">
+                                        <label>{{menuItem.text}}</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">User Access Rights</label>
+                    <br/>
+                    <br/>
+                </div> -->
+                <!-- <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">User Access Level</label>
+                    <div class="col-sm-3">
+                        <select name="accType" [(ngModel)]="newUser.access.level" class="form-control">
+                            <option>User Level</option>
+                            <option>Broker Level</option>
+                            <option>Super User Level</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <br/>
+                </div> -->
+                <!-- <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">May Update Email</label>
+                    <div class="col-sm-3">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input type="checkbox" [(ngModel)] = "newUser.access.email" (change)="updateMenuItems()" />
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div> -->
+                <!-- <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">May Update Profile</label>
+                    <div class="col-sm-3">
+                        <div class="checkbox c-checkbox">
+                            <label>
+                                <input type="checkbox" [(ngModel)] = "newUser.access.profile" (change)="updateMenuItems()" />
+                                <span class="fa fa-check"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </div> -->
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4"><a (click)="saveUser()" class="button btn btn-block btn-success">Save User</a>
+                </div>
+                <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>

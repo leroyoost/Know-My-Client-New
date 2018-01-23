@@ -1,0 +1,565 @@
+<div class="modal-body">
+    <!-- <tabset [justified]="true"> -->
+    <div>
+        <h3>New Verification</h3>
+        <!-- <ng-template tabHeading>New Verification</ng-template> -->
+        <div>
+            <fieldset>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <div class="col-sm-2"></div>
+                    <label class="col-sm-2 control-label">Verification Type</label>
+                    <div class="col-sm-6">
+                        <select name="title" [(ngModel)]="verification.type" class="form-control">
+                            <option value=""></option>
+                            <option *ngFor="let docType of (user|async)?.access.verifications" >{{docType.text}}</option>
+                        </select>
+                    </div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div><label class="col-sm-2 control-label">Reference Number</label>
+                    <div class="col-sm-6">
+                        <h5>Random Number</h5>
+                    </div>
+                    <div class="col-sm-2"></div>
+                    <br/>
+                    <br/>
+                </div>
+            </fieldset>
+            <!-- Bank Verification Form -->
+            <section *ngIf="verification.type === 'Bank Account Details'">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-2">
+                            <select name="title" [(ngModel)]="verification.title" class="form-control">
+                                    <option>Mr</option>
+                                    <option>Mrs</option>
+                                    <option>Ms</option>
+                                    <option>Miss</option>
+                                </select>
+                        </div>
+                        <label class="col-sm-1 control-label">Initials</label>
+                        <div class="col-sm-3">
+                            <input type="text" name="initials" [(ngModel)]='verification.initials' class="form-control" />
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="Title and Initials of account holder"><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Surname</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="surname" [(ngModel)]='verification.surname' class="form-control" />
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="Surname is matched with exact spelling but capitalisation is not important"><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">ID Number</label>
+                        <div class="col-sm-6">
+                            <input type="phone" name="idNo" [(ngModel)]='verification.idNo' class="form-control" />
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="13-digit South African ID nunmber of account holder"><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Bank Name</label>
+                        <div class="col-sm-6">
+                            <select name="bankName" [(ngModel)]="verification.bank" class="form-control">
+                                <option *ngFor="let bank of (lists|async)?.banks ">{{bank | titleCase}}</option>
+                            </select>
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Account Type</label>
+                        <div class="col-sm-6">
+                            <select name="accType" [(ngModel)]="verification.accType" class="form-control">
+                                <option *ngFor="let account of (lists|async)?.accounts ">{{account | titleCase}}</option>
+                    </select>
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="Transactional accounts are considered Cheque"><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Account Number</label>
+                        <div class="col-sm-3">
+                            <input type="phone" name="accNo" [(ngModel)]="verification.accNo" class="form-control" />
+                        </div>
+                        <label class="col-sm-1 control-label">Branch</label>
+                        <div class="col-sm-2">
+                            <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
+                        </div>
+                        <!-- <div style="padding-left:0px;" class="col-sm-3">
+                        <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
+                    </div> -->
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea placeholder="Add additional notes about this verification here.." rows="2" type="text" [(ngModel)]="verification.notes"
+                                class="form-control"></textarea>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-4"></div>
+                        <div class="col-sm-6">
+                            <label for="file1" class="file-upload">
+                                <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
+                                <input type="file" (change)="detectFiles($event)">
+                            </label>
+                            <br/>
+                            <br/>
+                            <p *ngIf="uploadQue.length === 0" class="lead text-center">No supprting documents attached...</p>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <br/>
+                    <br/>
+
+                    <div *ngIf="uploadQue.length > 0">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="35%">Document Type</th>
+                                            <th>Filename</th>
+                                            <th>Size</th>
+                                            <th> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of uploadQue; let i=index">
+                                            <td>
+                                                <div class="row">
+                                                    <div class='col-md-9'>
+                                                        <select name="fileType" [(ngModel)]="item.fileType" (change)="fileChange(i,item)" class="form-control">
+                                                            <option value=""></option>
+                                                            <option>Application Form</option>
+                                                            <option>Identity Document</option>
+                                                            <option>Proof of Address</option>
+                                                            <option>Proof of Account</option>
+                                                            <option>Bank Authorisation</option>
+                                                            <option>Power of Attorney</option>
+                                                            <option>Share Certificate</option>
+                                                            <option>Other (refer to notes)</option>
+                                                        </select>
+                                                    </div>
+                                                    <!-- <span *ngIf="form.validateInput('fileType', 'required') &amp;&amp; !item.fileType" class="text-danger">This field is required</span> -->
+                                                    <!-- <div style="padding-left:0px;" class="col-sm-3">
+                                                    <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
+                                                </div> -->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class='col-md-9'>
+                                                        <input type="text" name="fileType" [(ngModel)]="item.fileName" (change)="fileChange(i,item)" class="form-control" />
+                                                    </div>
+                                                    <!-- <div style="padding-left:0px;" class="col-sm-3">
+                                                    <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
+                                                </div> -->
+                                                </div>
+                                            </td>
+                                            <td nowrap>{{ item?.size/1024 | number:'.2' }} KB</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-danger btn-xs" (click)="removeFile(i)">
+                                                    <span class="fa fa-trash-o"></span>
+                                                </button>
+                                                <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                                                <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                                                <span *ngIf="item.isError"><i class="fa times"></i></span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div>
+                                    <div class="progress progress-xs">
+                                        <div [ngStyle]="{ 'width': currentUpload?.progress + '%' }" class="progress-bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </section>
+
+            <!-- Full Investigation Form -->
+            <section *ngIf="verification.type === 'Full Investigation'">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">First Name</label>
+                        <div class="col-sm-6">
+                            <input type="text" [(ngModel)]="verification.firstName" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Surname</label>
+                        <div class="col-sm-6">
+                            <input type="text" [(ngModel)]="verification.surname" class="form-control" />
+
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">ID Number</label>
+                        <div class="col-sm-6">
+                            <input type="text" [(ngModel)]="verification.id" class="form-control" />
+
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Email Address</label>
+                        <div class="col-sm-6">
+                            <input type="email" [(ngModel)]="verification.email" class="form-control" />
+
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Cellphone</label>
+                        <div class="col-sm-3">
+                            <input [(ngModel)]="verification.cellPhone" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Work Phone</label>
+                        <div class="col-sm-3">
+                            <input type="phone" name="workPhone" [(ngModel)]="verification.workPhone" class="form-control" />
+                        </div>
+                        <div class="col-sm-6"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Address Search</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" [(ngModel)]="address" [options]='options' (FormatAddress)="getFormattedAddress($event)"
+                                (street_number)='street_number=$event' (street)='street=$event' (city)='city=$event' (state)='state=$event'
+                                (district)='district=$event' (country)='country=$event' (postal_code)='postal_code=$event' (lat)='lat=$event'
+                                (lng)='lng=$event' (adr_address)='adr_address=$event' (name)='name=$event' (place_id)='place_id=$event'
+                                (types)='types=$event' (url)='url=$event' (utc_offset)='utc_offset=$event' (vicinity)='vicinity=$event'
+                                (photos)='photos=$event' (CountryCodes)='CountryCodes=$event' id="autocomplete" angularGooglePlace/>
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Unit Number</label>
+                        <div class="col-sm-2">
+                            <input [(ngModel)]="verification.address.unit" class="form-control" />
+                        </div>
+                        <label class="col-sm-1 control-label">Building</label>
+                        <div class="col-sm-3">
+                            <input [(ngModel)]="verification.address.building" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <label class="col-sm-2 control-label">Street No</label>
+                        <div class="col-sm-2">
+                            <input [(ngModel)]="verification.address.street_number" class="form-control" />
+                        </div>
+                        <label class="col-sm-1 control-label">Street</label>
+                        <div class="col-sm-3">
+                            <input [(ngModel)]="verification.address.street" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Suburb</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="verification.address.city" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">City</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="verification.address.vicinity" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Municipallity</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="verification.address.district" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Province</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="verification.address.state" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Country</label>
+                        <div class="col-sm-6">
+                            <input [(ngModel)]="verification.address.country" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Postal Code</label>
+                        <div class="col-sm-2">
+                            <input [(ngModel)]="verification.address.postal_code" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Bank</label>
+                        <div class="col-sm-6">
+                            <select name="bank" [(ngModel)]="verification.bank" class="form-control">
+
+                              </select>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Account Type</label>
+                        <div class="col-sm-6">
+                            <select name="accType" [(ngModel)]="verification.accType" class="form-control">
+
+                              </select>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Account Number</label>
+                        <div class="col-sm-3">
+                            <input type="phone" name="accNo" [(ngModel)]="verification.accNo" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Amount</label>
+                        <div class="col-sm-3">
+                            <input type="phone" placeholder="R" name="amount" [(ngModel)]="verification.amount" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Name of Benefit</label>
+                        <div class="col-sm-6">
+                            <input type="text" name="accNo" [(ngModel)]="verification.benefitName" class="form-control" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Type of Benefit</label>
+                        <div class="col-sm-6">
+                            <select name="benefitType" [(ngModel)]="verification.benefitType" class="form-control">
+                            </select>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea placeholder="Add additional notes about this verification here.." rows="4" type="text" name="accNo" [(ngModel)]="verification.note"
+                                class="form-control"></textarea>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </section>
+
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4"><a (click)="saveVerification()" class="button btn btn-block btn-success">Submit Verification</a>
+                    </div>
+                    <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+    <!-- </tab> -->
+    <!-- <tab>
+            <ng-template tabHeading>Capture Batch</ng-template>
+            <div>
+                <fieldset>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Investigation Type</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="verification.bulkType" class="form-control">
+                                <option *ngFor="let option of userVeriTpyes">{{option}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea placeholder="Add additional notes about this batch here.." rows="2" type="text" [(ngModel)]="verification.notes" class="form-control"></textarea>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-6">
+                            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="box-placeholder my-drop-zone text-center">
+                                    Drag and Drop Files Here to Attach Them...
+                            </div>
+                            <label for="file1" class="file-upload">
+                                <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
+                                <input id="file1" type="file" ng2FileSelect [uploader]="uploader" multiple />
+                            </label>
+                            <br/>
+                            <br/>
+                            <p *ngIf="!uploader?.queue?.length" class="lead text-center">No batch file loaded yet...</p>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div *ngIf="uploader?.queue?.length > 0" >
+                        {{uploader.queue.length}}
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Member Number</th>
+                                        <th>Title</th>
+                                        <th>Initials</th>
+                                        <th>Surname</th>
+                                        <th>ID Number</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch</th>
+                                        <th>Account Type</th>
+                                        <th>Account Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in verification.fileData.Sheet1">
+                                        <td>
+                                            ** item['Member_Number'] ++</td>
+                                        <td>
+                                            ** item['Title'] ++</td>
+                                        <td>
+                                            ** item['Initials'] ++</td>
+                                        <td>
+                                            ** item['Surname'] ++</td>
+                                        <td>
+                                            ** item['ID_Number'] ++</td>
+                                        <td>
+                                            ** item['Bank_Name'] ++</td>
+                                        <td>
+                                            ** item['Branch'] ++</td>
+                                        <td>
+                                            ** item['Account_Type'] ++</td>
+                                        <td>
+                                            ** item['Account_Number'] ++</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a (click)="addBatchSubmit()" class="button btn btn-block btn-success">Submit Batch</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab> -->
+    <!-- </tabset> -->
+</div>

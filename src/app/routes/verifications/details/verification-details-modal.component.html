@@ -1,0 +1,162 @@
+<div class="modal-body">
+    <tabset [justified]="true" type="pills">
+        <tab>
+            <ng-template tabHeading>Verification Details</ng-template>
+            <div>
+                <br/>
+                <br/>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Refernce Number</label>
+                        <label class="col-sm-3 control-label">{{verification.ref}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Verification Status</label>
+                        <label class="col-sm-3 control-label">{{verification.status}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Date Created</label>
+                        <label class="col-sm-3 control-label">{{verification.created | date: "dd-MMM-yy"}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Last Updated</label>
+                        <label class="col-sm-3 control-label">{{verification.updated | date: "dd-MMM-yy"}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Title</label>
+                        <label class="col-sm-3 control-label">{{verification.title}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Initials</label>
+                        <label class="col-sm-3 control-label">{{verification.initials}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Surname</label>
+                        <label class="col-sm-3 control-label">{{verification.surname}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">ID Number</label>
+                        <label class="col-sm-3 control-label">{{verification.idNo}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Bank Name</label>
+                        <label class="col-sm-3 control-label">{{verification.bank}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Branch</label>
+                        <label class="col-sm-3 control-label">{{verification.branch}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Account Type</label>
+                        <label class="col-sm-3 control-label">{{verification.accType}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">Account Number</label>
+                        <label class="col-sm-3 control-label">{{verification.accNo}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Account Currently Open</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_OPEN}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Account Debits</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_DEBITS}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Account Credits</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_CREDITS}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-6 control-label">Account Open 90 Days</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_LENGTH}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-4"><button href="" (click)="savePdf()" class="button btn btn-block btn-success">Save as PDF</button>
+                            </div>
+                            <div class="col-sm-4"><button (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</button>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab>
+        <tab>
+            <ng-template tabHeading>Verification Timeline</ng-template>
+            <div>
+                <br/>
+                <br/>
+                <ul class="timeline-alt">
+                    <li *ngFor=" let event of verification.events">
+                        <div class="timeline-badge {{event.colour}}">
+                            <em style="line-height:inherit;" class="{{event.icon}} fa-2x"></em>
+                        </div>
+                        <div class="timeline-panel">
+                            <div class="popover right">
+                                <h4 class="popover-title">
+                                    {{event.heading}}
+                                    <span class="pull-right">)</span>
+                                    <span class="pull-right">{{event.created | amTimeAgo}}</span>
+                                    <span class="pull-right">{{event.created | date: "dd-MM-yy HH:mm"}} (</span>
+                                </h4>
+                                <div class="arrow"></div>
+                                <div class="popover-content">
+                                    <p>{{event.primary}}</p>
+                                    <br/>
+                                    <small>{{event.secondary}}</small>
+                                    <br/>
+                                    <div *ngFor="let file of event.attachment">
+                                        <a target="_blank" href="{{file.fileUrl}}">
+                                            <em class="fa fa-paperclip"></em>
+                                            {{file.type}}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </tab>
+    </tabset>
+</div>

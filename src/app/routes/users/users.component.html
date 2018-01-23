@@ -1,0 +1,36 @@
+<div>
+  <div class="row">
+      <div class="col-sm-9 col-xs-7">
+          <h3 style="margin-top:0px;">Users</h3>
+      </div>
+      <div class="col-sm-3 col-xs-5">
+          <button type="button" class="btn btn-primary btn-block align-middle" (click)="addUserModal()"><i class="fa fa-plus"></i>  Add New</button>
+      </div>
+  </div>
+  <div class="table-responsive fixed">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th>Name</th>
+                  <th>Surname</th>
+                  <th>Email</th>
+                  <th>Company</th>
+                  <th>Last Login</th>
+                  <th>Created By</th>
+                  <th>Last Update</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let user of users | async" (click)="userDetailsModal(user)">
+                  <td>{{user.name}}</td>
+                  <td>{{user.surname}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.companyName}}</td>
+                  <td>{{user.login}}</td>
+                  <td>{{user.created.name}}</td>
+                  <td>{{user.created.time | date: "dd MMM yy hh:mm"}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>

@@ -1,0 +1,67 @@
+<div>
+    <h3 style="margin-top:0px;">System Configuration</h3>
+    <br/>
+    <div class="row">
+        <div class="col-xs-6">
+            <h4 class="m0">Companies</h4>
+        </div>
+        <div class="col-xs-6">
+            <a class="pull-right" (click)="addCompanyModal()"><i class="fa fa-plus"></i>  Add New</a>
+        </div>
+    </div>
+    <hr/>
+    <div class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-hover borderless">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>System ID</th>
+                        <th>Primary Colour</th>
+                        <th>Secondary Colour</th>
+                        <th>Users</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let company of companies | async" (click)="companyDetails(company)">
+                        <td>{{company.name}}</td>
+                        <td>{{company.id}}</td>
+                        <td>{{company.primary}}</td>
+                        <td>{{company.secondary}}</td>
+                        <td>{{company.users || 0}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            <br/>
+            <br/>
+            <h4 class="m0">Dropdown Lists</h4>
+        </div>
+        <div class="col-xs-6">
+            <br/>
+            <br/>
+            <a class="pull-right" (click)="addListModal()"><i class="fa fa-plus"></i>  Add New</a>
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngIf="lists | async as lsts$" >
+        <div class="col" *ngFor="let list of lsts$ | keys">
+            <strong>{{list | titleCase}}</strong>
+            <div class="table-responsive col-xs-12">
+                <table class="table table-hover borderless">
+                    <tbody>
+                        <tr *ngFor="let item of lsts$[list]; let i = index">
+                            <td>
+                                <a (click)="removeItem(list,i)" ><i class="fa fa-times"></i></a> {{item}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    _
+</div>

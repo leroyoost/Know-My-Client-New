@@ -1,0 +1,35 @@
+<div class="modal-body">
+    <h3>Add New List Item</h3>
+    <div>
+        <fieldset>
+            <label class="col-sm-3 control-label">Add to List</label>
+            <div class="col-sm-6">
+                <select [(ngModel)]="newItem.list" class="form-control">
+                    <option >Select A List</option>
+                    <option *ngFor="let list of lists | async | keys">{{list | titleCase}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <br/>
+                <br/>
+                <label style="margin-top:8px" class="col-sm-3 control-label">New Value</label>
+                <div class="col-sm-6">
+                    <input type="text" [(ngModel)]='newItem.value' class="form-control" />
+                </div>
+                <div class="col-sm-3"></div>
+                <br/>
+                <br/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-4"><a (click)="addToList()" class="button btn btn-block btn-success">Add</a>
+                </div>
+                <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Done</a>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+        </fieldset>
+    </div>
+</div>

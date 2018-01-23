@@ -1,0 +1,34 @@
+<div>
+  <div class="row">
+      <div class="col-sm-9 col-xs-7">
+          <h3 style="margin-top:0px;" >Verifications</h3>
+      </div>
+      <div class="col-sm-3 col-xs-5">
+          <button type="button" class="btn btn-primary btn-block align-middle" (click)="addModal()"><i class="fa fa-plus"></i>  Add New</button>
+      </div>
+  </div>
+  <div class="table-responsive fixed">
+      <table class="table table-hover">
+          <thead>
+              <tr>
+                  <th>Reference</th>
+                  <th>Surname</th>
+                  <th>Verification</th>
+                  <th>Date Created</th>
+                  <th>Last Updated</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let item of verifications | async" (click)="detailsModal(item)">
+                  <td>{{item.ref}}
+                  <td>{{item.surname}}</td>
+                  <td>{{item.type}}</td>
+                  <td>{{item.created}}</td>
+                  <td>{{item.updated}}</td>
+                  <td>{{item.status}}</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
