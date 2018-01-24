@@ -2,7 +2,7 @@
     <tabset [justified]="true" type="pills">
         <tab>
             <ng-template tabHeading>Verification Details</ng-template>
-            <div>
+            <div *ngIf="verification?.type == 'Bank Account Details'">
                 <br/>
                 <br/>
                 <fieldset>
@@ -116,6 +116,150 @@
                             <div class="col-sm-4"><button (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</button>
                             </div>
                             <div class="col-sm-2"></div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div *ngIf="verification?.type == 'Full Investigation'">
+                <fieldset>
+                    <div class="form-group">
+                        <br/>
+                        <br/>
+                        <label class="col-sm-3 control-label">Reference</label>
+                        <label class="col-sm-6 control-label">{{verification.id}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Verification Type</label>
+                        <label class="col-sm-6 control-label">{{verification.type}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">First Name</label>
+                        <label class="col-sm-6 control-label">{{verification.firstName}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Surname</label>
+                        <label class="col-sm-6 control-label">{{verification.surname}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">ID Number</label>
+                        <label class="col-sm-6 control-label">{{verification.idNo}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Email Address</label>
+                        <label class="col-sm-6 control-label">{{verification.email}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Cellphone</label>
+                        <label class="col-sm-6 control-label">{{verification.cellPhone}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Work Phone</label>
+                        <label class="col-sm-6 control-label">{{verification.workPhone}}</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Bank</label>
+                        <label class="col-sm-6 control-label">{{verification.bank}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Account Type</label>
+                        <label class="col-sm-6 control-label">{{verification.accType}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Account Number</label>
+                        <label class="col-sm-6 control-label">{{verification.accNo}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Amount</label>
+                        <label class="col-sm-6 control-label">R {{verification.amount | number}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Name of Benefit</label>
+                        <label class="col-sm-6 control-label">{{verification.benefitName}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Type of Benefit</label>
+                        <label class="col-sm-6 control-label">{{verification.benefitType}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Notes</label>
+                        <div class="col-sm-6">
+                            <table class="table">
+                                <tbody>
+                                    <tr *ngFor="let note of verification.Notes | orderBy : '-created'">
+                                        <td>
+                                            <div class="text text-muted">{{note.note}}</div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text text-muted">{{note.created | date: "dd-MMM-yy"}}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br/>
+                        <br/>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Supporting Documents</label>
+                        <div class="col-sm-6">
+                            <table styles="border:0px !important;" class="table">
+                                <tbody ngFor="event in verification.Events| orderBy : '-created'">
+                                    <tr ngFor="file in event.attachment">
+                                        <td> <a target="_blank" href="{{file?.fileUrl}}">{{file?.type}}</a>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="text text-muted">{{file?.created | date: "dd-MMM-yy"}}</div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div ng-if="details.kmc &amp;&amp; verification.status === 'pending' " class="row">
+                        <div class="col-sm-3"><a href="" ng-click="details.openModal('lg', 'verified')" class="button btn btn-block btn-success">Verify</a>
+                        </div>
+                        <div class="col-sm-3"><a href="" ng-click="details.openModal('lg', 'alerts')" class="button btn btn-block btn-danger">Reject</a>
+                        </div>
+                        <div class="col-sm-3"><a href="" ng-click="details.retrieveModal('lg', 'retrieve')" class="button btn btn-block btn-warning">Retrieve Details</a>
+                        </div>
+                        <div class="col-sm-3"><a href="" ng-click="details.openModal('lg', 'note')" class="button btn btn-block btn-info">Add Note</a>
                         </div>
                     </div>
                 </fieldset>

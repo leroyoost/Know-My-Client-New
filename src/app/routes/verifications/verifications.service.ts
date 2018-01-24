@@ -141,6 +141,27 @@ export class VerificationService {
         verification.created_name = this.userService.user.displayName
         verification.status = 'New'
         verification.files = []
-        return this.afs.collection('verifications').add(verification)
+
+        return new Promise ((resolve, reject)=>{
+          this.afs.collection('users').doc(this.userService.user.uid).valueChanges().subscribe(
+            (userDetail:any)=>{
+              if(userDetail){
+                console.log(userDetail.companyId)
+                this.afs.collection('companies/' + userDetail.companyId + '/verifications').add(verification)
+                .then(response=> {
+                  console.log(response)
+                  resolve(response)})
+                .catch(err=>{
+                  console.log(err)
+                  reject(err)
+                })
+              }
+            },
+            err=>{
+              console.log(err)
+              reject(err)
+            }
+          )
+        })
     }
 }

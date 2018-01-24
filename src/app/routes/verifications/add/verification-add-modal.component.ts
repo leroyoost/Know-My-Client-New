@@ -63,7 +63,7 @@ import { Address } from 'angular-google-place';
 
     public saveVerification(){
       this.verificationService.setVerifications(this.verification)
-      .then(response => {
+      .then((response:any) => {
         this.upSvc.pushUploadQue(this.uploadQue, response.id)
         this.verification = {}
         this.uploadQue = []
