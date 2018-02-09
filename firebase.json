@@ -1,3 +1,4 @@
+
 {
   "hosting": {
     "public": "dist",
@@ -5,6 +6,15 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "headers": [ {
+      "source" : "**/*",
+      "headers" : [ {
+        "key" : "x-frame-options",
+        "value" : "DENY"
+      } ]
+    } ],
+    "cleanUrls": true,
+    "trailingSlash": false
   }
 }

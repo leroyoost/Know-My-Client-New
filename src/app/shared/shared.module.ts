@@ -11,9 +11,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { MomentModule } from 'angular2-moment';
-import {SelectModule} from 'ng2-select';
+import { SelectModule } from 'ng2-select';
+import { TreeModule } from 'ng2-tree';
 import {AngularGooglePlaceModule} from 'angular-google-place';
-
+import { LoadingModule } from 'ngx-loading';
 
 //Services
 import { ColorsService } from './colors/colors.service';
@@ -38,7 +39,9 @@ import { ArrayFilterPipe } from './pipes/filter.pipe'
         TabsModule.forRoot(),
         TooltipModule.forRoot(),
         SelectModule,
-        AngularGooglePlaceModule
+        TreeModule,
+        AngularGooglePlaceModule,
+        LoadingModule
     ],
     providers: [
         ColorsService,
@@ -67,12 +70,14 @@ import { ArrayFilterPipe } from './pipes/filter.pipe'
         TabsModule,
         TooltipModule,
         SelectModule,
+        TreeModule,
         OrderByPipe,
         KeysPipe,
         TitleCasePipe,
         ArrayFilterPipe,
-        AngularGooglePlaceModule
-    ]
+        AngularGooglePlaceModule,
+        LoadingModule
+       ]
 })
 
 // https://github.com/ocombe/ng2-translate/issues/209

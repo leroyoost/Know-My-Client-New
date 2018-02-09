@@ -24,7 +24,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let company of companies | async" (click)="companyDetails(company)">
-                        <td>{{company.name}}</td>
+                        <td>{{company.text}}</td>
                         <td>{{company.id}}</td>
                         <td>{{company.primary}}</td>
                         <td>{{company.secondary}}</td>

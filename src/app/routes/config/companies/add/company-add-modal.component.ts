@@ -36,7 +36,7 @@ import * as _ from 'underscore'
 
     }
     detectFiles(event) {
-      event.target.files[0].fileName = event.target.files[0].name
+      //event.target.files[0].fileName = event.target.files[0].name
       this.uploadQue.push(event.target.files[0]);
     }
 

@@ -35,7 +35,7 @@
                 <label style="margin-top:8px" class="col-sm-3 control-label">Company</label>
                 <div class="col-sm-6">
                     <ng-select [allowClear]="false"
-                        [items]="companies | async"
+                        [items]="companies|async"
                         (selected)="selectCompany($event)"
                         placeholder="No company selected">
                     </ng-select>
@@ -46,6 +46,8 @@
             </div>
         </fieldset>
         <fieldset *ngIf="configItems as config">
+            <tree [tree]="tree"></tree>
+
             <div class="row">
                 <div class="col-sm-3" *ngFor="let configItem of config | keys">
                     <label>{{configItem | titleCase}}</label>

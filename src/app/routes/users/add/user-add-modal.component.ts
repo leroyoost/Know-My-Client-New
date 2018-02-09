@@ -7,7 +7,6 @@ import { User } from '../../../shared/models/user'
 import { Observable } from 'rxjs'
 import { configItems} from './models'
 
-
   @Component({
       selector: 'add-user-modal',
       templateUrl: './user-add-modal.component.html',
@@ -29,7 +28,7 @@ import { configItems} from './models'
       public settings: SettingsService
     ) {
       this.configItems = configItems
-      this.companies = this.settings.companies
+      this.companies = this.settings.companies$
       this.newUser.access = {}
     }
 

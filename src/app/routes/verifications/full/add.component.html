@@ -1,224 +1,21 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <div class="modal-body">
     <!-- <tabset [justified]="true"> -->
     <div>
         <h3>New Verification</h3>
         <!-- <ng-template tabHeading>New Verification</ng-template> -->
-        <div>
-            <fieldset>
-                <div class="form-group">
-                    <br/>
-                    <br/>
-                    <div class="col-sm-2"></div>
-                    <label class="col-sm-2 control-label">Verification Type</label>
-                    <div class="col-sm-6">
-                        <select name="title" [(ngModel)]="verification.type" class="form-control">
-                            <option value=""></option>
-                            <option *ngFor="let docType of (user|async)?.access.verifications" >{{docType.text}}</option>
-                        </select>
-                    </div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-2"></div><label class="col-sm-2 control-label">Reference Number</label>
-                    <div class="col-sm-6">
-                        <h5>Random Number</h5>
-                    </div>
-                    <div class="col-sm-2"></div>
-                    <br/>
-                    <br/>
-                </div>
-            </fieldset>
-            <!-- Bank Verification Form -->
-            <section *ngIf="verification.type === 'Bank Account Details'">
+        <div *ngIf="lists|async as lsts$">
+            <section>
                 <fieldset>
                     <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Title</label>
-                        <div class="col-sm-2">
-                            <select name="title" [(ngModel)]="verification.title" class="form-control">
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
-                                    <option>Ms</option>
-                                    <option>Miss</option>
-                                </select>
-                        </div>
-                        <label class="col-sm-1 control-label">Initials</label>
-                        <div class="col-sm-3">
-                            <input type="text" name="initials" [(ngModel)]='verification.initials' class="form-control" />
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="Title and Initials of account holder"><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Surname</label>
+                        <div class="col-sm-2"></div><label class="col-sm-2 control-label">Reference</label>
                         <div class="col-sm-6">
-                            <input type="text" name="surname" [(ngModel)]='verification.surname' class="form-control" />
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="Surname is matched with exact spelling but capitalisation is not important"><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">ID Number</label>
-                        <div class="col-sm-6">
-                            <input type="phone" name="idNo" [(ngModel)]='verification.idNo' class="form-control" />
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="13-digit South African ID nunmber of account holder"><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Bank Name</label>
-                        <div class="col-sm-6">
-                            <select name="bankName" [(ngModel)]="verification.bank" class="form-control">
-                                <option *ngFor="let bank of (lists|async)?.banks ">{{bank | titleCase}}</option>
-                            </select>
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Account Type</label>
-                        <div class="col-sm-6">
-                            <select name="accType" [(ngModel)]="verification.accType" class="form-control">
-                                <option *ngFor="let account of (lists|async)?.accounts ">{{account | titleCase}}</option>
-                    </select>
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="Transactional accounts are considered Cheque"><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Account Number</label>
-                        <div class="col-sm-3">
-                            <input type="phone" name="accNo" [(ngModel)]="verification.accNo" class="form-control" />
-                        </div>
-                        <label class="col-sm-1 control-label">Branch</label>
-                        <div class="col-sm-2">
-                            <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
-                        </div>
-                        <!-- <div style="padding-left:0px;" class="col-sm-3">
-                        <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
-                    </div> -->
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2"></div>
-                        <label class="col-sm-2 control-label">Notes</label>
-                        <div class="col-sm-6">
-                            <textarea placeholder="Add additional notes about this verification here.." rows="2" type="text" [(ngModel)]="verification.notes"
-                                class="form-control"></textarea>
-                        </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-4"></div>
-                        <div class="col-sm-6">
-                            <label for="file1" class="file-upload">
-                                <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
-                                <input type="file" (change)="detectFiles($event)">
-                            </label>
-                            <br/>
-                            <br/>
-                            <p *ngIf="uploadQue.length === 0" class="lead text-center">No supprting documents attached...</p>
+                            <h5>{{verification.ref}}</h5>
                         </div>
                         <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
                     </div>
-                    <br/>
-                    <br/>
-
-                    <div *ngIf="uploadQue.length > 0">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th width="35%">Document Type</th>
-                                            <th>Filename</th>
-                                            <th>Size</th>
-                                            <th> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of uploadQue; let i=index">
-                                            <td>
-                                                <div class="row">
-                                                    <div class='col-md-9'>
-                                                        <select name="fileType" [(ngModel)]="item.fileType" (change)="fileChange(i,item)" class="form-control">
-                                                            <option value=""></option>
-                                                            <option>Application Form</option>
-                                                            <option>Identity Document</option>
-                                                            <option>Proof of Address</option>
-                                                            <option>Proof of Account</option>
-                                                            <option>Bank Authorisation</option>
-                                                            <option>Power of Attorney</option>
-                                                            <option>Share Certificate</option>
-                                                            <option>Other (refer to notes)</option>
-                                                        </select>
-                                                    </div>
-                                                    <!-- <span *ngIf="form.validateInput('fileType', 'required') &amp;&amp; !item.fileType" class="text-danger">This field is required</span> -->
-                                                    <!-- <div style="padding-left:0px;" class="col-sm-3">
-                                                    <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
-                                                </div> -->
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class='col-md-9'>
-                                                        <input type="text" name="fileType" [(ngModel)]="item.fileName" (change)="fileChange(i,item)" class="form-control" />
-                                                    </div>
-                                                    <!-- <div style="padding-left:0px;" class="col-sm-3">
-                                                    <label tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."><i class="fa fa-question-circle fa-lg"></i></label>
-                                                </div> -->
-                                                </div>
-                                            </td>
-                                            <td nowrap>{{ item?.size/1024 | number:'.2' }} KB</td>
-                                            <td class="text-center">
-                                                <button type="button" class="btn btn-danger btn-xs" (click)="removeFile(i)">
-                                                    <span class="fa fa-trash-o"></span>
-                                                </button>
-                                                <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
-                                                <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
-                                                <span *ngIf="item.isError"><i class="fa times"></i></span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div>
-                                    <div class="progress progress-xs">
-                                        <div [ngStyle]="{ 'width': currentUpload?.progress + '%' }" class="progress-bar"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-            </section>
-
-            <!-- Full Investigation Form -->
-            <section *ngIf="verification.type === 'Full Investigation'">
-                <fieldset>
                     <div class="form-group">
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">First Name</label>
                         <div class="col-sm-6">
@@ -241,7 +38,7 @@
                     <div class="form-group">
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">ID Number</label>
                         <div class="col-sm-6">
-                            <input type="text" [(ngModel)]="verification.id" class="form-control" />
+                            <input type="text" [(ngModel)]="verification.idNo" class="form-control" />
 
                         </div>
                         <div class="col-sm-2"></div>
@@ -381,7 +178,7 @@
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">Bank</label>
                         <div class="col-sm-6">
                             <select name="bank" [(ngModel)]="verification.bank" class="form-control">
-
+                                <option *ngFor="let bank of lsts$?.banks">{{bank}}</option>
                               </select>
                         </div>
                         <div class="col-sm-2"></div>
@@ -392,7 +189,7 @@
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">Account Type</label>
                         <div class="col-sm-6">
                             <select name="accType" [(ngModel)]="verification.accType" class="form-control">
-
+                                    <option *ngFor="let account of lsts$?.accounts">{{account}}</option>
                               </select>
                         </div>
                         <div class="col-sm-2"></div>
@@ -432,6 +229,7 @@
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">Type of Benefit</label>
                         <div class="col-sm-6">
                             <select name="benefitType" [(ngModel)]="verification.benefitType" class="form-control">
+                                    <option *ngFor="let benefit of lsts$?.benefits">{{benefit}}</option>
                             </select>
                         </div>
                         <div class="col-sm-2"></div>
@@ -441,12 +239,80 @@
                     <div class="form-group">
                         <div class="col-sm-2"></div><label class="col-sm-2 control-label">Notes</label>
                         <div class="col-sm-6">
-                            <textarea placeholder="Add additional notes about this verification here.." rows="4" type="text" name="accNo" [(ngModel)]="verification.note"
+                            <textarea placeholder="Add additional notes about this verification here.." rows="4" type="text" name="accNo" [(ngModel)]="note"
                                 class="form-control"></textarea>
                         </div>
                         <div class="col-sm-2"></div>
                     </div>
                 </fieldset>
+                <fieldset>
+                        <div class="form-group">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-6">
+                                <label for="file1" class="file-upload">
+                                            <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
+                                            <input type="file" multiple="" (change)="detectFiles($event)">
+                                        </label>
+                                <br/>
+                                <br/>
+                                <p *ngIf="uploadQue.length === 0" class="lead text-center">No supprting documents attached...</p>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                        <br/>
+                        <br/>
+        
+                        <div *ngIf="uploadQue.length > 0">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th width="35%">Document Type</th>
+                                                <th>Filename</th>
+                                                <th>Size</th>
+                                                <th> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of uploadQue; let i=index">
+                                                <td>
+                                                    <div class="row">
+                                                        <div class='col-md-9'>
+                                                            <select name="fileType" [(ngModel)]="item.fileType" (change)="fileChange(i,item)" class="form-control">
+                                                                <option *ngFor="let doc of lsts$?.documents">{{doc}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="row">
+                                                        <div class='col-md-9'>
+                                                            <input type="text" name="fileType" [(ngModel)]="item.fileName" (change)="fileChange(i,item)" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td nowrap>{{ item?.size/1024/1024 | number:'.1-2' }} MB</td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-danger btn-xs" (click)="removeFile(i)">
+                                                                <span class="fa fa-trash-o"></span>
+                                                            </button>
+                                                    <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                                                    <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                                                    <span *ngIf="item.isError"><i class="fa times"></i></span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div>
+                                        <div class="progress progress-xs">
+                                            <div [ngStyle]="{ 'width': currentUpload?.progress + '%' }" class="progress-bar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
             </section>
 
             <fieldset>

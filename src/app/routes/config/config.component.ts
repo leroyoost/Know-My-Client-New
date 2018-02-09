@@ -58,11 +58,7 @@ export class ConfigComponent implements OnInit {
 
 
   ngOnInit() {
-    this.lists = this.settings.configRef.doc('lists').valueChanges()
-    this.companies = this.afs.collection('companies').valueChanges()
-    this.lists.subscribe(response=>{
-      this.existingList = response
-      console.log(this.existingList)
-    },err=>console.log(err))
+    this.lists = this.settings.configLists$
+    this.companies = this.settings.companies$
   }
 }

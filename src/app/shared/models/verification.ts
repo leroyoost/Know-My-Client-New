@@ -14,8 +14,10 @@ export class Verification {
     files: any[];
     events: any[];
     ref: string;
-    notes: string;
-    $key?: string
+    notes: any[];
+    $key?: string;
+    type?: string;
+    id?:string;
 }
 
 class extendedFile extends File {
@@ -29,7 +31,7 @@ class extendedFile extends File {
       file:extendedFile;
       name:string;
       url:string;
-      progress:number;
+      progress:any;
       createdAt: Date = new Date();
       description: string;
       constructor(file:extendedFile) {

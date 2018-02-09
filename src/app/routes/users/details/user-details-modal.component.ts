@@ -11,7 +11,9 @@ import { User } from '../../../shared/models/user'
   export class DetailsUserComponent {
     public verification:  any = {};
 
-    constructor(public bsModalRef: BsModalRef) {
+    constructor(
+      public bsModalRef: BsModalRef
+    ) {
       console.log('DetailsModalComponent Lanuched')
       console.log(this.verification)
     }

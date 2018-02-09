@@ -5,7 +5,7 @@
       <!-- START sidebar nav-->
       <ul class="nav">
 
-          <li *ngFor='let item of menuItems' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">
+          <li *ngFor='let item of menuItems | async' [ngClass]="{'nav-heading': item.heading}" [routerLinkActive]="['active']">
               <!-- menu heading -->
               <span *ngIf="item.heading">{{item.text}}</span>
               <!-- external links -->

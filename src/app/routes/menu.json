@@ -1,0 +1,37 @@
+{
+"mkOA4TSDcHTxML8WrQVm": [
+{
+    "text": "TEST ENVIRONMENT",
+    "link": "/app/dashboard",
+    "icon": "icon-alert"
+},
+{
+    "text": "Verifications",
+    "link": "/app/verification",
+    "icon": "icon-grid",
+    "submenu": [
+        {
+            "text": "Full Investigations",
+            "link": "/app/verification/full"
+        },
+        {
+            "text": "Bank Verifications",
+            "link": "/app/verification/bank"
+        },
+        {
+            "text": "Consumer Traces",
+            "link": "/app/verification/trace"
+        }
+    ]
+},
+{
+    "text": "User Admin",
+    "link": "/app/users",
+    "icon": "icon-user"
+},
+{
+    "text": "System Configuration",
+    "link": "/app/config",
+    "icon": "icon-settings"
+}]
+}

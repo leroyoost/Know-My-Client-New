@@ -1,0 +1,96 @@
+<div class="modal-header">
+        <h4 style="margin:0px;" >{{string}} Submission</h4>
+</div>
+<div class="modal-body">
+  <fieldset>
+     <div class="form-group">
+        <br/>
+        <br/>
+        <label class="col-sm-2 control-label">Note</label>
+        <div class="col-sm-8">
+           <textarea placeholder="Add additional notes about this verification here.." rows="6" type="text" name="accNo" [(ngModel)]="note" class="form-control"></textarea>
+        </div>
+        <div class="col-sm-2"></div>
+     </div>
+  </fieldset>
+  <fieldset>
+    <div class="form-group">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+            <label for="file1" class="file-upload">
+                        <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
+                        <input type="file" multiple="" (change)="detectFiles($event)">
+                    </label>
+            <br/>
+            <br/>
+            <p *ngIf="uploadQue?.length === 0" class="lead text-center">No supprting documents attached...</p>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <br/>
+    <br/>
+
+    <div *ngIf="uploadQue?.length > 0">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="35%">Document Type</th>
+                            <th>Filename</th>
+                            <th>Size</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of uploadQue; let i=index">
+                            <td>
+                                <div class="row">
+                                    <div class='col-md-9'>
+                                        <select name="fileType" [(ngModel)]="item.fileType" (change)="fileChange(i,item)" class="form-control">
+                                            <option *ngFor="let doc of (lists | async)?.documents">{{doc}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="row">
+                                    <div class='col-md-9'>
+                                        <input type="text" name="fileType" [(ngModel)]="item.fileName" (change)="fileChange(i,item)" class="form-control" />
+                                    </div>
+                                </div>
+                            </td>
+                            <td nowrap>{{ item?.size/1024/1024 | number:'.1-2' }} MB</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger btn-xs" (click)="removeFile(i)">
+                                            <span class="fa fa-trash-o"></span>
+                                        </button>
+                                <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+                                <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="item.isError"><i class="fa times"></i></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    <div class="progress progress-xs">
+                        <div [ngStyle]="{ 'width': currentUpload?.progress + '%' }" class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+</div>
+<div class="modal-footer">
+  <div class="row">
+     <div class="col-sm-2"></div>
+     <div class="col-sm-4">
+        <button (click)="submitUpdate()" class="btn btn-block btn-primary">Submit</button>
+     </div>
+     <div class="col-sm-4">
+        <button (click)="bsModalRef.hide()" class="btn btn-block btn-danger">Cancel</button>
+     </div>
+     <div class="col-sm-2"></div>
+  </div>
+</div>

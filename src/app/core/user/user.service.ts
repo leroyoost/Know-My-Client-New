@@ -16,6 +16,7 @@ export class UserService {
     private auth: AngularFireAuth,
     private router: Router
   ) { 
+
     this.auth.auth.onAuthStateChanged(
       user => {
           if(user){
@@ -38,4 +39,22 @@ export class UserService {
       }
     )
   }
+
+  public isAdmin(){
+    return new Observable((observer=>{
+        this.auth.auth.onAuthStateChanged(user=>{
+            if(user){
+                this.afs.collection('users').doc(user.uid).valueChanges().subscribe((details:any)=>{
+                    console.log(details)
+                    observer.next(details.isAdmin) 
+                },
+            err=>{
+                console.log(err)
+                observer.error(err)
+            })
+            }
+        })
+    })
+    )
+}
 }

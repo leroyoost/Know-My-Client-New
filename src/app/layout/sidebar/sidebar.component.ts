@@ -1,9 +1,12 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs'
 declare var $: any;
 
 import { MenuService } from '../../core/menu/menu.service';
 import { SettingsService } from '../../core/settings/settings.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
     selector: 'app-sidebar',
@@ -12,19 +15,29 @@ import { SettingsService } from '../../core/settings/settings.service';
 })
 export class SidebarComponent implements OnInit {
 
-    menuItems: Array<any>;
+    menuItems: Observable<any>;
     router: Router;
 
-    constructor(public menu: MenuService, public settings: SettingsService, public injector: Injector) {
+    constructor(
+        public menu: MenuService, 
+        public settings: SettingsService, 
+        public injector: Injector,
+        private db: AngularFireDatabase,
+        private afa: AngularFireAuth
+    ) {
 
-        this.menuItems = menu.getMenu();
-
+        this.afa.auth.onAuthStateChanged(user=>{
+            if(user){
+                this.menuItems = this.db.list(user.uid).valueChanges()
+                this.menuItems.subscribe(output=>{
+                    console.log(output)})
+            }
+        })
     }
 
     ngOnInit() {
 
         this.router = this.injector.get(Router);
-
         this.router.events.subscribe((val) => {
             // close any submenu opened when route changes
             this.removeFloatingNav();

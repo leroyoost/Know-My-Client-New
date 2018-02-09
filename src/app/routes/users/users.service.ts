@@ -25,18 +25,18 @@ export class UsersService {
     public getUsers(): Observable<User[]>{
         return this.userList
     }
+
     public createUser(user) {
             user.status = 'Created'
             user.created = {
-                uid: this.userService.user.uid,
-                name: this.userService.user.displayName,
+                uid: this.afAuth.auth.currentUser.uid,
+                name: this.afAuth.auth.currentUser.displayName,
                 time: new Date()
             }
             this.afs.collection('users').add(user)
                 .then(result=>console.log(result))
                 .catch(err=>console.log(err))
     }
-
     public getCurrentUser(){
     
     }

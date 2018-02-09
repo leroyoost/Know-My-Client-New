@@ -17,12 +17,9 @@ export class SettingsService {
     public configRef: AngularFirestoreCollection<any>;
     public userSettings: Observable<{}>;
     public existingList: {};
-    public companies: Observable<any>;
+    public companies$: Observable<any>;
     public companiesRef: AngularFirestoreCollection<any>;
     public configLists$: Observable<any>
-    public bankList: Observable<any>
-    public accountList: Observable<any>
-    public veriList: Observable<any>
 
     constructor(
         public afs: AngularFirestore, 
@@ -42,15 +39,10 @@ export class SettingsService {
         // App Config from FireStore
         //--------------------------------
         
-        this.configRef = this.afs.collection('config')
-
-        this.bankList = this.afs.doc('config/lists').valueChanges()
-        this.accountList = this.afs.collection('config/lists/accounts').valueChanges()
-        this.veriList = this.afs.collection('config/lists/verifications').valueChanges()
-
         this.companiesRef = this.afs.collection('companies')
-        this.companies = this.companiesRef.valueChanges()
-        this.configLists$ = this.configRef.valueChanges()
+        this.companies$ = this.companiesRef.valueChanges()
+        this.configRef = this.afs.collection('config')
+        this.configLists$ = this.configRef.doc('lists').valueChanges()
         this.configRef.doc('lists').valueChanges().subscribe(response=>{
             this.existingList = response
           },err=>console.log(err))
