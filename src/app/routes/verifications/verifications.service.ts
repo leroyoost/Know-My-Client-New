@@ -278,7 +278,8 @@ export class VerificationService {
 
 
 
-// // takes file uplad que and instended operation (status) and completes file uplad then creates appropriate event and return completed verification
+// // takes file uplad que and instended operation (status) and completes file uplad
+// then creates appropriate event and return completed verification
 // public fileUpload(uploadQue, verification, note?, status?): PromiseLike<any> {
 //   return new Promise((resolve, reject) => {
 //     let promiseList = []
