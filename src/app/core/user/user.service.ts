@@ -8,53 +8,52 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class UserService {
 
-  user: firebase.User
-  userConfig: Observable<{}>
+  user: firebase.User;
+  userConfig: Observable<{}>;
 
   constructor(
     private afs: AngularFirestore,
     private auth: AngularFireAuth,
     private router: Router
-  ) { 
+  ) {
 
     this.auth.auth.onAuthStateChanged(
       user => {
-          if(user){
-              console.log(user)
-              this.user = user
-              this.userConfig = this.afs.collection('users').doc(user.uid).valueChanges()
-              console.log(this.router.url)
-              if(this.router.url.indexOf('/login') > -1 ){
-                  console.log("yes")
-                  this.router.navigate(['verifications'])
+          if (user) {
+              console.log(user);
+              this.user = user;
+              this.userConfig = this.afs.collection('users').doc(user.uid).valueChanges();
+              console.log(this.router.url);
+              if (this.router.url.indexOf('/login') > -1 ) {
+                  console.log('yes');
+                  this.router.navigate(['verifications']);
               }
+          } else {
+              this.router.navigate(['login']);
           }
-          else{ 
-              this.router.navigate(['login'])
-          }
-      },  
-      err=>{
-          console.log(err)
-          this.router.navigate(['login'])
+      },
+      err => {
+          console.log(err);
+          this.router.navigate(['login']);
       }
-    )
+    );
   }
 
-  public isAdmin(){
-    return new Observable((observer=>{
-        this.auth.auth.onAuthStateChanged(user=>{
-            if(user){
-                this.afs.collection('users').doc(user.uid).valueChanges().subscribe((details:any)=>{
-                    console.log(details)
-                    observer.next(details.isAdmin) 
+  public isAdmin() {
+    return new Observable((observer => {
+        this.auth.auth.onAuthStateChanged(user => {
+            if (user) {
+                this.afs.collection('users').doc(user.uid).valueChanges().subscribe((details: any) => {
+                    console.log(details);
+                    observer.next(details.isAdmin);
                 },
-            err=>{
-                console.log(err)
-                observer.error(err)
-            })
+            err => {
+                console.log(err);
+                observer.error(err);
+            });
             }
-        })
+        });
     })
-    )
+    );
 }
 }

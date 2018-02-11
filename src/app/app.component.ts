@@ -10,9 +10,9 @@ import { SettingsService } from './core/settings/settings.service';
 })
 export class AppComponent implements OnInit {
 
-    @HostBinding('class.layout-fixed') get isFixed() { return true; };
-    @HostBinding('class.layout-fs') get useFullLayout() { return false; };
-    
+    @HostBinding('class.layout-fixed') get isFixed() { return true; }
+    @HostBinding('class.layout-fs') get useFullLayout() { return false; }
+
     constructor(public settings: SettingsService) { }
 
     ngOnInit() {

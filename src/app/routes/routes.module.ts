@@ -9,8 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
 
-import { AddUserComponent } from './users/add/user-add-modal.component'
-import { DetailsUserComponent } from './users/details/user-details-modal.component'
+import { AddUserComponent } from './users/add/user-add-modal.component';
+import { DetailsUserComponent } from './users/details/user-details-modal.component';
 import { ConfigComponent } from './config/config.component';
 import { AddCompanyComponent } from './config/companies/add/company-add-modal.component';
 import { AddListsComponent } from './config/lists/lists-add-modal.component';
@@ -32,7 +32,7 @@ import { routes } from './routes';
         RouterModule.forRoot(routes),
         VerificationsModule
     ],
-    declarations:[
+    declarations: [
       LoginComponent,
       DashboardComponent,
       UsersComponent,
@@ -42,7 +42,7 @@ import { routes } from './routes';
       AddCompanyComponent,
       AddListsComponent
     ],
-    entryComponents:[
+    entryComponents: [
         AddUserComponent,
         DetailsUserComponent,
         AddCompanyComponent,

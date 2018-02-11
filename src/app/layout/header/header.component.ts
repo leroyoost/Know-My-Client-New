@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ThemesService } from '../../core/themes/themes.service';
-import { UserService } from '../../core/user/user.service'
+import { UserService } from '../../core/user/user.service';
 
 @Component({
     selector: 'app-header',
@@ -16,8 +16,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(
       public userService: UserService,
-      public themes: ThemesService) 
-      {
+      public themes: ThemesService) {
         this.currentTheme = themes.getDefaultTheme();
       }
     ngOnInit() {

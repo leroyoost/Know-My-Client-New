@@ -10,7 +10,7 @@ declare var $: any;
 @Injectable()
 export class SettingsService {
 
-    
+
     public user: firebase.User;
     public app: any;
     public layout: any;
@@ -19,15 +19,15 @@ export class SettingsService {
     public existingList: {};
     public companies$: Observable<any>;
     public companiesRef: AngularFirestoreCollection<any>;
-    public configLists$: Observable<any>
+    public configLists$: Observable<any>;
 
     constructor(
-        public afs: AngularFirestore, 
+        public afs: AngularFirestore,
         public afAuth: AngularFireAuth,
         public router: Router
-    ){
+    ) {
 
-        console.log('SettingsService constructor fired')
+        console.log('SettingsService constructor fired');
         // App Settings
         // ---------------------------------
         this.app = {
@@ -38,14 +38,14 @@ export class SettingsService {
 
         // App Config from FireStore
         //--------------------------------
-        
-        this.companiesRef = this.afs.collection('companies')
-        this.companies$ = this.companiesRef.valueChanges()
-        this.configRef = this.afs.collection('config')
-        this.configLists$ = this.configRef.doc('lists').valueChanges()
-        this.configRef.doc('lists').valueChanges().subscribe(response=>{
-            this.existingList = response
-          },err=>console.log(err))
+
+        this.companiesRef = this.afs.collection('companies');
+        this.companies$ = this.companiesRef.valueChanges();
+        this.configRef = this.afs.collection('config');
+        this.configLists$ = this.configRef.doc('lists').valueChanges();
+        this.configRef.doc('lists').valueChanges().subscribe(response => {
+            this.existingList = response;
+          }, err => console.log(err));
 
         // Layout Settings
         // -----------------------------------
@@ -69,34 +69,34 @@ export class SettingsService {
 
     }
 
-    getCurrentUser():Observable<firebase.User>{
-        return this.afAuth.authState
+    getCurrentUser(): Observable<firebase.User> {
+        return this.afAuth.authState;
     }
 
-    configListAdd(list,value){
-        this.existingList[list.toLocaleLowerCase()].push(value)
-        this.configRef.doc('lists').set(this.existingList)
+    configListAdd(list, value) {
+        this.existingList[list.toLocaleLowerCase()].push(value);
+        this.configRef.doc('lists').set(this.existingList);
     }
 
-    configListRemove(list,i){
-        this.existingList[list.toLocaleLowerCase()].splice(i,1)
-        this.configRef.doc('lists').set(this.existingList)
+    configListRemove(list, i) {
+        this.existingList[list.toLocaleLowerCase()].splice(i, 1);
+        this.configRef.doc('lists').set(this.existingList);
     }
 
-    createUser(email, password, name:string) {
+    createUser(email, password, name: string) {
         this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-        .then(user=>{
+        .then(user => {
             this.afAuth.auth.currentUser.updateProfile({
                 displayName: name,
-                photoURL: "none"
-            })
+                photoURL: 'none'
+            });
         })
         .catch(function(error) {
-            console.log(error.message)
+            console.log(error.message);
           });
     }
-    getUserSetting(email : string) {
-        this.userSettings = this.afs.collection('users').doc(this.user.uid).valueChanges()
+    getUserSetting(email: string) {
+        this.userSettings = this.afs.collection('users').doc(this.user.uid).valueChanges();
     }
     getLayoutSetting(name) {
         return name ? this.layout[name] : this.layout;

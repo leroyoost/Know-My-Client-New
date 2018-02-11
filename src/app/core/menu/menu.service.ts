@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MenuService {
@@ -13,8 +12,8 @@ export class MenuService {
 
     }
 
-    addMenu(){
-        console.log('add menu fired')
+    addMenu() {
+        console.log('add menu fired');
     }
 
     getMenu() {

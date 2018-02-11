@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { User } from '../../../shared/models/user'
+import { User } from '../../../shared/models/user';
   @Component({
       selector: 'user-details-modal',
       templateUrl: './user-details-modal.component.html',
@@ -14,7 +14,7 @@ import { User } from '../../../shared/models/user'
     constructor(
       public bsModalRef: BsModalRef
     ) {
-      console.log('DetailsModalComponent Lanuched')
-      console.log(this.verification)
+      console.log('DetailsModalComponent Lanuched');
+      console.log(this.verification);
     }
   }

@@ -20,10 +20,10 @@ import { LoadingModule } from 'ngx-loading';
 import { ColorsService } from './colors/colors.service';
 
 //Pipes
-import { OrderByPipe } from './pipes/orderBy.pipe'
-import { KeysPipe } from './pipes/keys.pipe'
-import { TitleCasePipe } from './pipes/titleCase.pipe'
-import { ArrayFilterPipe } from './pipes/filter.pipe'
+import { OrderByPipe } from './pipes/orderBy.pipe';
+import { KeysPipe } from './pipes/keys.pipe';
+import { TitleCasePipe } from './pipes/titleCase.pipe';
+import { ArrayFilterPipe } from './pipes/filter.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({

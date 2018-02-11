@@ -18,12 +18,12 @@ export class LoginComponent implements OnInit {
     email: string;
     password: string;
     public alerts: any = [];
-    
+
     constructor(
-        public settings: SettingsService, 
-        public fb: FormBuilder, 
+        public settings: SettingsService,
+        public fb: FormBuilder,
         public router: Router,
-        public afAuth: AngularFireAuth, 
+        public afAuth: AngularFireAuth,
         public injector: Injector
     ) {
 
@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
     }
 
     loginWithEmail() {
-        if (this.valForm.valid) { 
+        if (this.valForm.valid) {
             this.afAuth
             .auth
             .signInWithEmailAndPassword(this.email, this.password)
             .then(value => {
-                this.router.navigate(['app/dashboard'])
+                this.router.navigate(['app/dashboard']);
             })
             .catch(err => {
                 this.alerts.push({
@@ -48,9 +48,8 @@ export class LoginComponent implements OnInit {
                     timeout: 5000
                 });
             });
-        }
-        else{
-            console.log('form not valid')
+        } else {
+            console.log('form not valid');
         }
       }
 

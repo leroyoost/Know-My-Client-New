@@ -3,4 +3,4 @@ export const ModalConfig = {
     keyboard: true,
     backdrop: true,
     ignoreBackdropClick: false
-  }
+  };

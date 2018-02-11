@@ -15,8 +15,8 @@ import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFirestoreModule} from 'angularfire2/firestore'
-import { AngularFireStorageModule } from 'angularfire2/storage'
+import { AngularFirestoreModule} from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 import { environment } from '../environments/environment';
 import * as firebase from 'firebase/app';
 
@@ -36,10 +36,10 @@ import * as firebase from 'firebase/app';
     CoreModule,
     LayoutModule,
     SharedModule.forRoot(),
-    RoutesModule    
+    RoutesModule
   ],
   providers: [
-    {provide: LocationStrategy, 
+    {provide: LocationStrategy,
     useClass: HashLocationStrategy}
   ],
 

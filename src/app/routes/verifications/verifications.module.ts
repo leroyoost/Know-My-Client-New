@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '../../shared/shared.module'
+import { SharedModule } from '../../shared/shared.module';
 
 import { FullModule } from './full/full.module';
 //import { BankModule } from './bank/bank.module';
@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'full', component: FullComponent }
   //,{ path: 'bank', component: BankComponent },
   //{ path: 'trace', component: TraceComponent }
-]
+];
 
 @NgModule({
   imports: [
@@ -31,10 +31,10 @@ const routes: Routes = [
   ],
   declarations: [
   ],
-  providers:[
+  providers: [
     VerificationService,
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })

@@ -10,7 +10,7 @@ export const routes = [
         component: LayoutComponent,
         children: [
             { path: 'dashboard', component: DashboardComponent},
-            { path: 'verification', loadChildren:'./verifications/verifications.module#VerificationsModule'},
+            { path: 'verification', loadChildren: './verifications/verifications.module#VerificationsModule'},
             { path: 'users', component: UsersComponent },
             { path: 'config', component: ConfigComponent }
         ]

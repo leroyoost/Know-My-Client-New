@@ -12,18 +12,18 @@ import * as firebase from 'firebase/app';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private auth : AngularFireAuth,
+    private auth: AngularFireAuth,
     private router: Router
          ) { }
 
-  public logout(){
+  public logout() {
     this.auth.auth.signOut().then(
-      response=>{
-        console.log(response)
-        this.router.navigate(['login'])
+      response => {
+        console.log(response);
+        this.router.navigate(['login']);
 
       }
-    )
+    );
   }
 
   ngOnInit() {
