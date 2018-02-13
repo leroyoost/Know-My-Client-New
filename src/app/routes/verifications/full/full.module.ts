@@ -6,6 +6,7 @@ import { AddComponent } from './add.component';
 import { DetailsComponent } from './details.component';
 import { FullComponent } from './full.component';
 import { UpdateComponent } from './update.component';
+import { RequestComponent } from './request.component';
 
 @NgModule({
   imports: [
@@ -16,12 +17,14 @@ import { UpdateComponent } from './update.component';
     AddComponent,
     DetailsComponent,
     FullComponent,
-    UpdateComponent
+    UpdateComponent,
+    RequestComponent
   ],
   entryComponents: [
     AddComponent,
     DetailsComponent,
-    UpdateComponent
+    UpdateComponent,
+    RequestComponent
   ]
 })
 export class FullModule { }

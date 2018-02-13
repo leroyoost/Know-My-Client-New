@@ -4,20 +4,20 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 
 import { FullModule } from './full/full.module';
-//import { BankModule } from './bank/bank.module';
-//import { TraceModule } from './trace/trace.module';
+// import { BankModule } from './bank/bank.module';
+// import { TraceModule } from './trace/trace.module';
 
 import { FullComponent } from './full/full.component';
-//import { BankComponent } from './bank/bank.component';
-//import { TraceComponent } from './trace/trace.component';
+// import { BankComponent } from './bank/bank.component';
+// import { TraceComponent } from './trace/trace.component';
 
 import { VerificationService } from './verifications.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'full', component: FullComponent }
-  //,{ path: 'bank', component: BankComponent },
-  //{ path: 'trace', component: TraceComponent }
+  // { path: 'bank', component: BankComponent },
+  // { path: 'trace', component: TraceComponent }
 ];
 
 @NgModule({
@@ -25,8 +25,8 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FullModule,
-    //BankModule,
-    //TraceModule,
+    // BankModule,
+    // TraceModule,
     RouterModule.forChild(routes)
   ],
   declarations: [

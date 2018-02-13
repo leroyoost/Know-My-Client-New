@@ -5,7 +5,9 @@ import { UsersService } from '../users.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { User } from '../../../shared/models/user';
 import { Observable } from 'rxjs/Observable';
-import { configItems} from './models';
+import { SideMenu} from '../../../shared/models/sidemenu';
+declare var require: any;
+const swal = require('sweetalert');
 
   @Component({
       selector: 'app-add-user-modal',
@@ -16,43 +18,42 @@ import { configItems} from './models';
 
   export class AddUserComponent implements OnInit {
 
-    configItems: {};
     verificationTypes: string[];
-    newUser: User = {};
+    user: User = {};
     companies: Observable<any>;
     selectedCompany: {} = {};
+    loading = false;
 
     constructor(
       private usersService: UsersService,
       public bsModalRef: BsModalRef,
       public settings: SettingsService
     ) {
-      this.configItems = configItems;
       this.companies = this.settings.companies$;
-      this.newUser.access = {};
+      this.user.sidemenu = SideMenu;
     }
 
-    public updateAccess(list) {
-      const that = this;
-      this.newUser.access[list] = [];
-      this.configItems[list].forEach(function(listItem) {
-        if (listItem.active) {
-          that.newUser.access[list].push(listItem);
-        }
-      });
-      console.log(this.newUser);
-    }
     public selectCompany(company) {
-      this.newUser.companyId = company.id;
-      this.newUser.companyName = company.text;
+      this.user.companyId = company.id;
+      this.user.companyName = company.text;
 
-      console.log(this.newUser);
+      console.log(this.user);
     }
-
 
     public saveUser() {
-        // this.settingsService.createUser('leroyoost@gmail.com','Investec123','Leroy Oosthuyzen')
-        this.usersService.createUser(this.newUser);
+      this.loading = true;
+      this.usersService.createUser(this.user)
+        .then(result => {
+          this.loading = false;
+          swal('Success!', 'User Created', 'success');
+          this.bsModalRef.hide();
+          console.log(result);
+        })
+        .catch(err => {
+          console.log(err);
+          this.loading = false;
+          swal('Error!', err, 'error');
+        });
     }
     ngOnInit() {
   }

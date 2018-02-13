@@ -1,0 +1,299 @@
+<div class="modal-body">
+    <tabset [justified]="true" type="pills">
+        <tab>
+            <ng-template tabHeading>ID Check</ng-template>
+            <fieldset>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <label class="col-sm-3 control-label">ID Number</label>
+                    <div class="col-sm-6">
+                        <input type="text" [(ngModel)]="data.idNo" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div *ngIf="response.firstName">
+                        <label class="col-sm-3 control-label">First Name</label>
+                        <label class="col-sm-3 control-label">{{response.firstName}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.surname">
+                        <label class="col-sm-3 control-label">Surname</label>
+                        <label class="col-sm-3 control-label">{{response.surname}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.dateofBirth">
+                        <label class="col-sm-3 control-label">Date of Birth</label>
+                        <label class="col-sm-3 control-label">{{response.dateofBirth}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.age">
+                        <label class="col-sm-3 control-label">Age</label>
+                        <label class="col-sm-3 control-label">{{response.age}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.gender">
+                        <label class="col-sm-3 control-label">Gender</label>
+                        <label class="col-sm-3 control-label">{{response.gender}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.citizenship">
+                        <label class="col-sm-3 control-label">Citizenship</label>
+                        <label class="col-sm-3 control-label">{{response.citizenship}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.dateofIssue">
+                        <label class="col-sm-3 control-label">Date of Issue</label>
+                        <label class="col-sm-3 control-label">{{response.dateofIssue}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.idNumber">
+                        <label class="col-sm-3 control-label">ID Number</label>
+                        <label class="col-sm-3 control-label">{{response.idNumber}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.idStatus">
+                        <label class="col-sm-3 control-label">ID Status</label>
+                        <label class="col-sm-3 control-label">{{response.idStatus}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.deathStatus">
+                        <label class="col-sm-3 control-label">Death Status</label>
+                        <label class="col-sm-3 control-label">{{response.deathStatus}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.deathDate">
+                        <label class="col-sm-3 control-label">Death Date</label>
+                        <label class="col-sm-3 control-label">{{response.deathDate}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response.deathPlace">
+                        <label class="col-sm-3 control-label">Death Place</label>
+                        <label class="col-sm-3 control-label">{{response.deathPlace}}</label>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div *ngIf="response">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </tab>
+        <tab>
+            <ng-template tabHeading>Bank Verification</ng-template>
+            <fieldset>
+                <br/>
+                <br/>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Title</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="tile" [(ngModel)]="data.Title" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Initials</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="initials" [(ngModel)]="data.Initials" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Surname</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="surname" [(ngModel)]="data.Surname" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">ID Number</label>
+                    <div class="col-sm-6">
+                        <input type="phone" name="idNo" [(ngModel)]="data.ID_Number" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Bank Name</label>
+                    <div class="col-sm-6">
+                        <select name="bankName" [(ngModel)]="data.Bank_Name" class="form-control">
+                             <option>Absa Bank</option>
+                             <option>African Bank Limited</option>
+                             <option>Bidvest Bank Limited</option>
+                             <option>Capitec Bank</option>
+                             <option>Commercial Bank of South Africa PLC</option>
+                             <option>First National Bank</option>
+                             <option>Grindrod Limited</option>
+                             <option>Imperial Bank South Africa</option>
+                             <option>Investec Bank Limited</option>
+                             <option>Nedbank Limited</option>
+                             <option>Merchantile Bank</option>
+                             <option>Rand Merchant Bank</option>
+                             <option>Sasfin Bank Limited</option>
+                             <option>Standard Bank</option>
+                             <option>Teba Bank Limited</option>
+                          </select>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Account Type</label>
+                    <div class="col-sm-6">
+                        <select name="accType" [(ngModel)]="data.Account_Type" class="form-control">
+                             <option>Cheque</option>
+                             <option>Savings</option>
+                             <option>Bond</option>
+                             <option>Credit Card</option>
+                             <option>Transmission</option>
+                          </select>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Account Number</label>
+                    <div class="col-sm-3">
+                        <input type="phone" name="accNo" [(ngModel)]="data.Account_Number" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Branch</label>
+                    <div class="col-sm-3">
+                        <input type="phone" name="branch" [(ngModel)]="data.Branch" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </fieldset>
+        </tab>
+        <tab>
+            <ng-template tabHeading>ID Check</ng-template>
+            <fieldset>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <label class="col-sm-3 control-label">ID Number</label>
+                    <div class="col-sm-6">
+                        <input type="text" [(ngModel)]="data.idNo" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <label class="col-sm-3 control-label">First Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" [(ngModel)]="data.firstName" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <label class="col-sm-3 control-label">Surname</label>
+                    <div class="col-sm-6">
+                        <input type="text" [(ngModel)]="data.surname" class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div *ngIf="response">
+                        <h3>Personal Details</h3>
+                        <div *ngFor="let section of response?.data?.personal">
+                            <div *ngFor="let record of section">
+                                <div *ngFor="let line of record">
+                                    <label class="col-sm-3 control-label">{{line.index}}</label>
+                                    <label class="col-sm-3 control-label">{{line.data}}</label>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                        <h3>Most Recent Addresses</h3>
+                        <div *ngFor="let section of response.data?.address">
+                            <div class="col sm-6">
+                                <div *ngFor="let record of section">
+                                    <label *ngFor="let line of record" class="col-sm-12 control-label">{{line.data}}</label>
+                                </div>
+                            </div>
+                            <br/>
+                        </div>
+                        <h3>Most Recent Contact Details</h3>
+                        <div *ngFor="let section of response.data?.telephone">
+                            <div *ngFor="let record of section">
+                                <label *ngFor="let line of record" class="col-sm-3 control-label">{{line.data}}</label>
+                                <br/>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
+                            </div>
+                            <div class="col-sm-4">
+                                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </tab>
+    </tabset>
+    <div *ngIf="!response">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve</button>
+            </div>
+            <div class="col-sm-4">
+                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+</div>

@@ -5,25 +5,24 @@
     "link": "/app/dashboard",
     "icon": "icon-alert"
 },
+
+    
 {
-    "text": "Verifications",
-    "link": "/app/verification",
-    "icon": "icon-grid",
-    "submenu": [
-        {
-            "text": "Full Investigations",
-            "link": "/app/verification/full"
-        },
-        {
-            "text": "Bank Verifications",
-            "link": "/app/verification/bank"
-        },
-        {
-            "text": "Consumer Traces",
-            "link": "/app/verification/trace"
-        }
-    ]
+    "text": "Full Investigations",
+    "link": "/app/verification/full",
+    "icon": "icon-magnifier"
 },
+{
+    "text": "Bank Verifications",
+    "link": "/app/verification/bank",
+    "icon": "icon-magnifier"
+},
+{
+    "text": "Consumer Traces",
+    "link": "/app/verification/trace",
+    "icon": "icon-magnifier"
+},
+
 {
     "text": "User Admin",
     "link": "/app/users",

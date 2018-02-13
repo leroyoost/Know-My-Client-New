@@ -95,15 +95,15 @@
                     <label class="col-sm-3 control-label">Notes</label>
                     <div class="col-sm-6">
                         <table class="table">
-                            <tbody>
-                                <tr *ngFor="let note of verification.notes | orderBy : '-created'">
-                                    <td>
-                                        <div class="text text-muted">{{note.text}}</div>
-                                    </td>
-                                    <td width="20%">
-                                        <div class="text text-muted">{{note.created | date: "dd-MMM-yy"}}</div>
-                                    </td>
-                                </tr>
+                            <tbody *ngFor="let event of verification.events | orderBy : '-created' ">
+                                <div *ngIf='event.secondary'>
+                                    <tr>
+                                        <td>{{event?.secondary}}</td>
+                                        <td width="20%">
+                                            <div class="text text-muted">{{event?.created | date: "dd-MMM-yy"}}</div>
+                                        </td>
+                                    </tr>
+                                </div>
                             </tbody>
                         </table>
                     </div>
@@ -126,20 +126,6 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <br/>
-                        <br/>
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div *ngIf="(isAdmin | async) && (verification.status == 'new' || verification.status == 'pending')" class="row">
-                    <div class="col-sm-3"><a (click)="updateModal(verification, 'Verify','verified')" class="button btn btn-block btn-success">Verify</a>
-                    </div>
-                    <div class="col-sm-3"><a  (click)="updateModal(verification, 'Reject','rejected')" class="button btn btn-block btn-danger">Reject</a>
-                    </div>
-                    <div class="col-sm-3"><a  (click)="getData(verification)" class="button btn btn-block btn-warning">Retrieve Details</a>
-                    </div>
-                    <div class="col-sm-3"><a  (click)="updateModal(verification, 'Add Note to', 'note')" class="button btn btn-block btn-info">Add Note</a>
                     </div>
                 </div>
             </fieldset>
@@ -160,7 +146,7 @@
                                     {{event.heading}}
                                     <span class="pull-right"></span>
                                     <span class="pull-right"> {{event.created | amTimeAgo}})</span>
-                                    <span class="pull-right">{{event.created | date: "dd-MM-yy H:mm"}} (</span>
+                                    <span class="pull-right">{{event.created | date: "dd-MMM-yy H:mm"}} (</span>
                                 </h4>
                                 <div class="arrow"></div>
                                 <div class="popover-content">
@@ -184,5 +170,25 @@
                 </ul>
             </div>
         </tab>
+        <fieldset>
+            <div *ngIf="isAdmin && (verification.status == 'new' || verification.status == 'pending')" class="row">
+                <div class="col-sm-3"><a (click)="updateModal(verification, 'Verify','verified')" class="button btn btn-block btn-success">Verify</a>
+                </div>
+                <div class="col-sm-3"><a  (click)="updateModal(verification, 'Reject','rejected')" class="button btn btn-block btn-danger">Reject</a>
+                </div>
+                <div class="col-sm-3"><a  (click)="requestModal(verification)" class="button btn btn-block btn-info">Retrieve Details</a>
+                </div>
+                <div class="col-sm-3"><a  (click)="updateModal(verification, 'Add Note to', 'note')" class="button btn btn-block btn-info">Add Note</a>
+                </div>
+            </div>
+            <div *ngIf="(verification.status != 'new' && verification.status != 'pending')" class="row">
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-4"><a  (click)="updateModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
+                </div>
+                <div class="col-sm-4">
+                </div>
+            </div>
+        </fieldset>
     </tabset>
 </div>

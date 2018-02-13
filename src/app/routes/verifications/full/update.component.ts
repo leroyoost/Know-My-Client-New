@@ -7,6 +7,8 @@ import { SettingsService } from '../../../core/settings/settings.service';
 import { VerificationService } from '../verifications.service';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
+declare var require: any;
+const swal = require('sweetalert');
 
 
 @Component({
@@ -21,6 +23,7 @@ export class UpdateComponent implements OnInit {
   uploadQue: File[] = [];
   lists: Observable<any>;
   note: string;
+  loading = false;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -28,7 +31,6 @@ export class UpdateComponent implements OnInit {
     public settingsService: SettingsService,
     public verificationService: VerificationService
   ) {
-
   }
   detectFiles(event) {
     console.log(event.target.files);
@@ -49,7 +51,18 @@ export class UpdateComponent implements OnInit {
       console.log(index);
   }
   submitUpdate() {
-    // this.verificationService.updateVerification(this.uploadQue,this.verification,this.mode,this.note)
+    this.loading = true;
+    this.verificationService.updateVerification(this.uploadQue, this.verification, this.mode, this.note)
+      .then(response => {
+        console.log(response);
+        this.loading = false;
+        swal('Success!', 'Verification Updated', 'success');
+      })
+      .catch(err => {
+        this.loading = false;
+        swal('Error!', err, 'error');
+        console.log(err);
+      });
   }
 
     ngOnInit() {

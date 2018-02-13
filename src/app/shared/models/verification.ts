@@ -10,6 +10,7 @@ export class Verification {
     created_date?: number;
     created_uid?: string;
     created_name?: string;
+    updated_date?: number;
     status: string;
     files: any[];
     events: any[];

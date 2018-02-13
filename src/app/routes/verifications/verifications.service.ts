@@ -27,16 +27,15 @@ export class EventService {
         'created': new Date().getTime(),
         'heading': user + ' submitted a new verification',
         'primary': 'The details have been sent to Know My Client with reference number ' + ref,
-        'secondary': 'Note: ' + note,
+        'secondary': note,
         'icon': 'icon-plus',
-        'colour': 'bg-blue',
+        'colour': 'info',
         'attachment': attachment
       },
       pending: {
         'created': new Date().getTime(),
         'heading': 'Verification has been picked up and is being processed',
         'primary': user + ' from Know My Client has started an investigation',
-        'secondary': 'More details will follow shortly',
         'icon': 'icon-refresh',
         'colour': 'warning'
       },
@@ -44,7 +43,7 @@ export class EventService {
         'created': new Date().getTime(),
         'heading': 'Verification successful',
         'primary': 'The identitiy details submitted have been confirmed',
-        'secondary': 'Note: ' + note,
+        'secondary': note,
         'icon': 'icon-check',
         'colour': 'success',
         'attachment': attachment
@@ -53,7 +52,7 @@ export class EventService {
         'created': new Date().getTime(),
         'heading': 'Alert! This identity could not be verified',
         'primary': 'Do not complete transaction without further investigation',
-        'secondary': 'Note: ' + note,
+        'secondary': note,
         'icon': 'icon-close',
         'colour': 'danger',
         'attachment': attachment
@@ -61,19 +60,10 @@ export class EventService {
       note: {
         'created': new Date().getTime(),
         'heading': user + ' added the following note:',
-        'primary': 'Note: ' + note,
-        'secondary': 'Further updates will follow shortly',
-        'icon': 'icon-info',
-        'colour': 'active',
-        'attachment': attachment
-      },
-      report: {
-        'created': new Date().getTime(),
-        'heading': user + ' attached the following document',
         'primary': '',
-        'secondary': 'Note: ' + note,
+        'secondary': note,
         'icon': 'icon-info',
-        'colour': 'active',
+        'colour': 'info',
         'attachment': attachment
       }
     };
@@ -101,11 +91,15 @@ export class VerificationService {
   public generaterRef() {
     let text = '';
     const possible = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789';
-    for (let i = 0; i < 8; i++) {
-      console.log('numgen cycle');
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
     return text;
-    }
   }
 
   public getVerifications(veriType): Observable<any> {
@@ -204,7 +198,7 @@ export class VerificationService {
     });
   }
 
-
+  // Uploads files and returns an event object with notes and attachments
   fileHandler(uploadQue, ref, status, note?) {
     console.log('fileHandler Fired');
     return new Promise((resolve, reject) => {
@@ -226,13 +220,11 @@ export class VerificationService {
     });
   }
 
-
   public createNewVerification(uploadQue, verification: Verification, veriType, note?): PromiseLike<any> {
     verification.events = [];
     verification.notes = [];
     verification.created_date = new Date().getTime();
     verification.type = veriType;
-    if (note) { verification.notes.push({ 'text': note, 'created': verification.created_date }); }
     verification.created_uid = this.userService.user.uid;
     verification.created_name = this.userService.user.displayName;
     verification.status = 'new';
@@ -247,101 +239,19 @@ export class VerificationService {
       });
   }
 
-  // public updateVerification(uploadQue, verification:Verification, status, note?):Promise<any> {
-
-
-
-
-  //   return new Promise((resolve,reject) =>{
-  //       return(this.fileUpload(uploadQue,verification,note,status)
-  //         .then((newVeri:Verification)=>{
-  //           newVeri.status = status
-  //           console.log(newVeri)
-  //           this.afs.collection('verifications').doc(verification.id).update(newVeri)
-  //             .then(updateResult=>{
-  //               resolve(updateResult)
-  //             })
-  //             .catch(err=>{
-  //               console.log(err)
-  //               reject(err)
-  //             });
-  //         },
-  //         err=>{
-  //           reject(err);
-  //         })
-  //       )
-  //   })
-  // }
+  public updateVerification(uploadQue, verification: Verification, status, note?): Promise<any> {
+    return new Promise((resolve, reject) => {
+        return(this.fileHandler(uploadQue, verification.ref, status, note)
+        .then(fileEvent => {
+          verification.events.push(fileEvent);
+          if (status !== 'note') {verification.status = status; }
+          verification.updated_date = new Date().getTime();
+          resolve (this.afs.collection('verifications').doc(verification.id).update(verification));
+        })
+        .catch(err => {
+          reject(err);
+        })
+      );
+    });
+  }
 }
-
-
-
-
-
-// // takes file uplad que and instended operation (status) and completes file uplad
-// then creates appropriate event and return completed verification
-// public fileUpload(uploadQue, verification, note?, status?): PromiseLike<any> {
-//   return new Promise((resolve, reject) => {
-//     let promiseList = []
-//     this.auth.auth.onAuthStateChanged(user => {
-//       if (user) {
-//         this.afs.collection('users').doc(user.uid).valueChanges().subscribe((response: any) => {
-//           if (uploadQue.length > 0) {
-//             uploadQue.forEach(file => {
-
-//               console.log('uploading: ' + file.fileName)
-//               this.currentUpload = new Upload(file);
-//               let uploadRef = this.afStorage.ref('/uploads/' + response.companyId + '/' + verification.ref + '/' + file.fileName)
-//               let uploadTask = uploadRef.put(this.currentUpload.file)
-
-//               promiseList.push(new Promise((resolve, reject) => {
-//                 uploadTask.downloadURL().subscribe(
-//                   url => {
-//                     if (url) {
-//                       console.log('returned download url: ' + url)
-//                       let fileResult = {
-//                         'fileUrl': url,
-//                         'created': new Date().getTime(),
-//                         'fileName': file.fileName,
-//                         'fileType': file.fileType
-//                       }
-//                       resolve(fileResult)
-//                     }
-//                     else {
-//                       reject('no url returned')
-//                       console.log('no url returned!!')
-//                     }
-//                   },
-//                   err => {
-//                     console.log(err)
-//                     reject(err)
-//                   })
-//               }))
-//             })
-//             Promise.all(promiseList)
-//               .then(fileResult => {
-//                 console.log(fileResult)
-//                 verification.events.push(this.eventService.getEvent(verification.ref, note, fileResult)[status])
-//                 console.log('verification ready for upload')
-//                 console.log(verification)
-//                 resolve(verification)
-//               })
-//               .catch(err => {
-//                 console.log(err)
-//                 reject(err)
-//               })
-//           }
-//           else {
-//             verification.events.push(this.eventService.getEvent(verification.ref, note, [])[status])
-//             console.log('verification ready for upload - no files')
-//             console.log(verification)
-//             resolve(verification)
-//           }
-//         }, err => {
-//           console.log(err)
-//           reject(err)
-//         })
-//       }
-//     })
-//   })
-// }

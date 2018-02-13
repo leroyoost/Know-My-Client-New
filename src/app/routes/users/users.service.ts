@@ -10,7 +10,7 @@ import { UserService } from '../../core/user/user.service';
 export class UsersService {
     user: Observable<firebase.User>;
     userList: Observable<User[]>;
-
+    loading = false;
     constructor(
         public afs: AngularFirestore,
         public afAuth: AngularFireAuth,
@@ -26,18 +26,21 @@ export class UsersService {
     }
 
     public createUser(user) {
-            user.status = 'Created';
-            user.created = {
-                uid: this.afAuth.auth.currentUser.uid,
-                name: this.afAuth.auth.currentUser.displayName,
-                time: new Date()
-            };
-            this.afs.collection('users').add(user)
-                .then(result => console.log(result))
-                .catch(err => console.log(err));
+        user.status = 'Created';
+        user.created = {
+            uid: this.afAuth.auth.currentUser.uid,
+            name: this.afAuth.auth.currentUser.displayName,
+            time: new Date().getTime()
+        };
+        return (this.afs.collection('users').add(user));
     }
-    public getCurrentUser() {
-
+    public updateUser(user) {
+        user.updated = {
+            uid: this.afAuth.auth.currentUser.uid,
+            name: this.afAuth.auth.currentUser.displayName,
+            time: new Date().getTime()
+        };
+        return (this.afs.collection('users').doc(user.id).update(user));
     }
 
 }

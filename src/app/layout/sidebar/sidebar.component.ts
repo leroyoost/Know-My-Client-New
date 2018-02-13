@@ -5,7 +5,7 @@ declare var $: any;
 
 import { MenuService } from '../../core/menu/menu.service';
 import { SettingsService } from '../../core/settings/settings.service';
-import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
@@ -15,22 +15,20 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class SidebarComponent implements OnInit {
 
-    menuItems: Observable<any>;
+    userConfig: Observable<any>;
     router: Router;
 
     constructor(
         public menu: MenuService,
         public settings: SettingsService,
         public injector: Injector,
-        private db: AngularFireDatabase,
+        private afs: AngularFirestore,
         private afa: AngularFireAuth
     ) {
 
         this.afa.auth.onAuthStateChanged(user => {
             if (user) {
-                this.menuItems = this.db.list(user.uid).valueChanges();
-                this.menuItems.subscribe(output => {
-                    console.log(output); });
+                this.userConfig = this.afs.collection('users').doc(user.uid).valueChanges();
             }
         });
     }

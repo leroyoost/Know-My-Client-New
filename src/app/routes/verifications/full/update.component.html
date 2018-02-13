@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
 <div class="modal-header">
         <h4 style="margin:0px;" >{{string}} Submission</h4>
 </div>
@@ -8,15 +9,15 @@
         <br/>
         <label class="col-sm-2 control-label">Note</label>
         <div class="col-sm-8">
-           <textarea placeholder="Add additional notes about this verification here.." rows="6" type="text" name="accNo" [(ngModel)]="note" class="form-control"></textarea>
+           <textarea placeholder="Add additional notes about this verification here.." rows="3" type="text" name="accNo" [(ngModel)]="note" class="form-control"></textarea>
         </div>
         <div class="col-sm-2"></div>
      </div>
   </fieldset>
   <fieldset>
     <div class="form-group">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
             <label for="file1" class="file-upload">
                         <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
                         <input type="file" multiple="" (change)="detectFiles($event)">
@@ -25,7 +26,7 @@
             <br/>
             <p *ngIf="uploadQue?.length === 0" class="lead text-center">No supprting documents attached...</p>
         </div>
-        <div class="col-sm-3"></div>
+        <div class="col-sm-2"></div>
     </div>
     <br/>
     <br/>
@@ -86,7 +87,7 @@
   <div class="row">
      <div class="col-sm-2"></div>
      <div class="col-sm-4">
-        <button (click)="submitUpdate()" class="btn btn-block btn-primary">Submit</button>
+        <button (click)="submitUpdate()" class="btn btn-block btn-success">Submit</button>
      </div>
      <div class="col-sm-4">
         <button (click)="bsModalRef.hide()" class="btn btn-block btn-danger">Cancel</button>

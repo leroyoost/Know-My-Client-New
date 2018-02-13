@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "knowmyclient-1501076246449"
+    "default": "knowmyclient-1501076246449",
+    "test": "knowmyclienttest",
+    "live": "knowmyclient-1501076246449"
   }
 }

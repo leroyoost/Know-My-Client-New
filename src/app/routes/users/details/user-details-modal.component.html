@@ -1,0 +1,81 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<div class="modal-body">
+        <h3>Add New User</h3>
+        <div>
+            <fieldset>
+                <div class="form-group">
+                    <br/>
+                    <br/>
+                    <label style="margin-top:8px" class="col-sm-3 control-label">Name</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="name" [(ngModel)]='user.name' class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">Surname</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="surname" [(ngModel)]='user.surname' class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">Email Address</label>
+                    <div class="col-sm-6">
+                        <input type="text" name="email" [(ngModel)]='user.email' class="form-control" />
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+                <div class="form-group">
+                    <label style="margin-top:8px" class="col-sm-3 control-label">Company</label>
+
+                    <div class="col-sm-6">
+                        <label style="margin-top:8px" class="control-label">{{user.companyName}}</label>
+                    </div>
+                    <div class="col-sm-3"></div>
+                    <br/>
+                    <br/>
+                </div>
+            </fieldset>
+            <fieldset *ngIf="user?.sidemenu">
+                <div class="form-group">
+                    <div class="table-responsive col-sm-6">
+                        <label>Feature Access</label>
+                        <table class="table table-hover borderless">
+                            <tbody>
+                                <tr *ngFor="let menuItem of user?.sidemenu">
+                                    <td style="width:20px !important;">
+                                        <div class="checkbox c-checkbox">
+                                            <label>
+                                                <input type="checkbox" [(ngModel)] = "menuItem.active" />
+                                                <span class="fa fa-check"></span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="p0">
+                                        <label>{{menuItem.text}}</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4"><a (click)="updateUser()" class="button btn btn-block btn-success">Save Changes</a>
+                    </div>
+                    <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+            </fieldset>
+        </div>
+    </div>

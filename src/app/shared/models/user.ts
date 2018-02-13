@@ -5,7 +5,7 @@ export class User {
     status?: string;
     companyId?: string;
     companyName?: string;
-    access?: {};
+    sidemenu?: {};
 }
 
 
