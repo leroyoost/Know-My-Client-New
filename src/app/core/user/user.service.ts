@@ -10,6 +10,7 @@ export class UserService {
 
   user: firebase.User;
   userConfig: Observable<{}>;
+  idToken: string;
 
   constructor(
     private afs: AngularFirestore,
@@ -22,6 +23,9 @@ export class UserService {
           if (user) {
               console.log(user);
               this.user = user;
+              user.getToken().then(token => {
+                this.idToken = token;
+              });
               this.userConfig = this.afs.collection('users').doc(user.uid).valueChanges();
               console.log(this.router.url);
               if (this.router.url.indexOf('/login') > -1 ) {

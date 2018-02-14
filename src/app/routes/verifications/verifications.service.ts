@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { SettingsService } from '../../core/settings/settings.service';
 import { UserService } from '../../core/user/user.service';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -9,7 +10,7 @@ import { Upload } from '../../shared/models/verification';
 import * as firebase from 'firebase/app'; // for typings
 import { FirebaseApp } from 'angularfire2'; // for
 import { Observable } from 'rxjs/Observable';
-import { zip } from 'rxjs/observable/zip';
+import 'rxjs/add/operator/toPromise';
 import * as _ from 'lodash';
 
 
@@ -83,7 +84,8 @@ export class VerificationService {
     private settings: SettingsService,
     private eventService: EventService,
     private userService: UserService,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    public http: HttpClient
   ) {
 
   }
@@ -253,5 +255,9 @@ export class VerificationService {
         })
       );
     });
+  }
+
+  public apiCall (endpoint: string, data: {}) {
+    return this.http.post('https://secure.knowmyclient.com/api/' + endpoint, data).toPromise();
   }
 }

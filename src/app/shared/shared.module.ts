@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-//Modules
+// Modules
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -16,14 +16,15 @@ import { TreeModule } from 'ng2-tree';
 import {AngularGooglePlaceModule} from 'angular-google-place';
 import { LoadingModule } from 'ngx-loading';
 
-//Services
+// Services
 import { ColorsService } from './colors/colors.service';
 
-//Pipes
+// Pipes
 import { OrderByPipe } from './pipes/orderBy.pipe';
 import { KeysPipe } from './pipes/keys.pipe';
 import { TitleCasePipe } from './pipes/titleCase.pipe';
 import { ArrayFilterPipe } from './pipes/filter.pipe';
+import { CleanKeyPipe } from './pipes/cleanKey.pipe';
 
 // https://angular.io/styleguide#!#04-10
 @NgModule({
@@ -48,13 +49,15 @@ import { ArrayFilterPipe } from './pipes/filter.pipe';
         OrderByPipe,
         KeysPipe,
         TitleCasePipe,
-        ArrayFilterPipe
+        ArrayFilterPipe,
+        CleanKeyPipe
     ],
     declarations: [
         OrderByPipe,
         KeysPipe,
         TitleCasePipe,
-        ArrayFilterPipe
+        ArrayFilterPipe,
+        CleanKeyPipe
 
     ],
     exports: [
@@ -75,6 +78,7 @@ import { ArrayFilterPipe } from './pipes/filter.pipe';
         KeysPipe,
         TitleCasePipe,
         ArrayFilterPipe,
+        CleanKeyPipe,
         AngularGooglePlaceModule,
         LoadingModule
        ]

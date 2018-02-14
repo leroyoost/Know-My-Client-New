@@ -1,14 +1,19 @@
-
 {
   "hosting": {
     "public": "dist",
+    "rewrites": [ {
+      "source": "https://secure.knowmyclient.com/api/idVerify", "function": "idVerify"
+    },
+    {
+      "source": "/api/bankVerify", "function": "bankVerify"
+    } ],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
     "headers": [ {
-      "source" : "**/*",
+      "source" : "**",
       "headers" : [ {
         "key" : "x-frame-options",
         "value" : "DENY"

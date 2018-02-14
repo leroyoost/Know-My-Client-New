@@ -35,17 +35,25 @@ export class LoginComponent implements OnInit {
 
     loginWithEmail() {
         if (this.valForm.valid) {
-            this.afAuth
-            .auth
-            .signInWithEmailAndPassword(this.email, this.password)
-            .then(value => {
-                this.router.navigate(['app/dashboard']);
+            this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            .then(() => {
+                this.afAuth.auth
+                .signInWithEmailAndPassword(this.email, this.password)
+                .then(value => {
+                    this.router.navigate(['app/dashboard']);
+                })
+                .catch(err => {
+                    this.alerts.push({
+                        type: 'warning',
+                        msg: 'Login failed: ' +  err.message,
+                        timeout: 5000
+                    });
+                });
             })
             .catch(err => {
                 this.alerts.push({
                     type: 'warning',
-                    msg: 'Login failed: ' +  err.message,
-                    timeout: 5000
+                    msg: 'Login failed: ' +  err.message
                 });
             });
         } else {

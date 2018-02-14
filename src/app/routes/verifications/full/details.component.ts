@@ -30,8 +30,8 @@ import { Observable } from 'rxjs/Observable';
     public savePdf() {
     }
     public requestModal(verification) {
-      // this.requestModalRef = this.modalService.show(RequestComponent, Object.assign({}, ModalConfig, {class: 'modal-md'}));
-      // this.requestModalRef.content.verification = verification;
+       this.requestModalRef = this.modalService.show(RequestComponent, Object.assign({}, ModalConfig, {class: 'modal-md'}));
+       this.requestModalRef.content.verification = verification;
     }
     public updateModal(verification, string, mode) {
       this.updateModalRef = this.modalService.show(UpdateComponent, Object.assign({}, ModalConfig, {class: 'modal-md'}));

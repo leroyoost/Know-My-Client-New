@@ -10,7 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { RoutesModule } from './routes/routes.module';
 
 
-
+import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -32,6 +32,7 @@ import * as firebase from 'firebase/app';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     HttpModule,
+    HttpClientModule,
     BrowserModule,
     CoreModule,
     LayoutModule,

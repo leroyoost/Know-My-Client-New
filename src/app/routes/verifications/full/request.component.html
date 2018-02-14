@@ -12,94 +12,27 @@
                     </div>
                     <div class="col-sm-3"></div>
                 </div>
-                <div class="form-group">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div *ngIf="response.firstName">
-                        <label class="col-sm-3 control-label">First Name</label>
-                        <label class="col-sm-3 control-label">{{response.firstName}}</label>
+            </fieldset>
+            <fieldset>
+                <div *ngFor="let label of response?.jsonTable | keys">
+                    <div class="form-group" *ngIf="response?.jsonTable[label]">
                         <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.surname">
-                        <label class="col-sm-3 control-label">Surname</label>
-                        <label class="col-sm-3 control-label">{{response.surname}}</label>
-                        <br/>
+                        <label class="col-sm-3 control-label">{{label | cleanKey}}</label>
+                        <label class="col-sm-3 control-label">{{response?.jsonTable[label] | titleCase}}</label>
                         <br/>
                     </div>
-                    <div *ngIf="response.dateofBirth">
-                        <label class="col-sm-3 control-label">Date of Birth</label>
-                        <label class="col-sm-3 control-label">{{response.dateofBirth}}</label>
-                        <br/>
-                        <br/>
+                </div>
+            </fieldset>
+            <fieldset *ngIf="response">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
                     </div>
-                    <div *ngIf="response.age">
-                        <label class="col-sm-3 control-label">Age</label>
-                        <label class="col-sm-3 control-label">{{response.age}}</label>
-                        <br/>
-                        <br/>
+                    <div class="col-sm-4">
+                        <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
                     </div>
-                    <div *ngIf="response.gender">
-                        <label class="col-sm-3 control-label">Gender</label>
-                        <label class="col-sm-3 control-label">{{response.gender}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.citizenship">
-                        <label class="col-sm-3 control-label">Citizenship</label>
-                        <label class="col-sm-3 control-label">{{response.citizenship}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.dateofIssue">
-                        <label class="col-sm-3 control-label">Date of Issue</label>
-                        <label class="col-sm-3 control-label">{{response.dateofIssue}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.idNumber">
-                        <label class="col-sm-3 control-label">ID Number</label>
-                        <label class="col-sm-3 control-label">{{response.idNumber}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.idStatus">
-                        <label class="col-sm-3 control-label">ID Status</label>
-                        <label class="col-sm-3 control-label">{{response.idStatus}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.deathStatus">
-                        <label class="col-sm-3 control-label">Death Status</label>
-                        <label class="col-sm-3 control-label">{{response.deathStatus}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.deathDate">
-                        <label class="col-sm-3 control-label">Death Date</label>
-                        <label class="col-sm-3 control-label">{{response.deathDate}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response.deathPlace">
-                        <label class="col-sm-3 control-label">Death Place</label>
-                        <label class="col-sm-3 control-label">{{response.deathPlace}}</label>
-                        <br/>
-                        <br/>
-                    </div>
-                    <div *ngIf="response">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
-                            </div>
-                        </div>
+                    <div class="col-sm-4">
+                        <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
                     </div>
                 </div>
             </fieldset>
@@ -239,7 +172,7 @@
                     <br/>
                     <div *ngIf="response">
                         <h3>Personal Details</h3>
-                        <div *ngFor="let section of response?.data?.personal">
+                        <div *ngFor="let section of response?.jsonTable.data?.personal">
                             <div *ngFor="let record of section">
                                 <div *ngFor="let line of record">
                                     <label class="col-sm-3 control-label">{{line.index}}</label>
@@ -249,7 +182,7 @@
                             </div>
                         </div>
                         <h3>Most Recent Addresses</h3>
-                        <div *ngFor="let section of response.data?.address">
+                        <div *ngFor="let section of response?.jsonTable.data?.address">
                             <div class="col sm-6">
                                 <div *ngFor="let record of section">
                                     <label *ngFor="let line of record" class="col-sm-12 control-label">{{line.data}}</label>
@@ -258,7 +191,7 @@
                             <br/>
                         </div>
                         <h3>Most Recent Contact Details</h3>
-                        <div *ngFor="let section of response.data?.telephone">
+                        <div *ngFor="let section of response?.jsonTable.data?.telephone">
                             <div *ngFor="let record of section">
                                 <label *ngFor="let line of record" class="col-sm-3 control-label">{{line.data}}</label>
                                 <br/>
@@ -286,7 +219,7 @@
         <div class="row">
             <div class="col-sm-2"></div>
             <div class="col-sm-4">
-                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve</button>
+                <button (click)="idVerify(data.idNo)" class="btn btn-block btn-primary">Retrieve</button>
             </div>
             <div class="col-sm-4">
                 <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
