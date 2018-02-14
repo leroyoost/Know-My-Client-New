@@ -4,7 +4,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class KeysPipe implements PipeTransform {
     transform(value: any, args: any[] = null): any {
         if (value) {
-            return Object.keys(value); //.map(key => value[key]);
+            return Object.keys(value); // .map(key => value[key]);
         }
     }
 }

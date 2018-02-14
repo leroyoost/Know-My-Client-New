@@ -26,7 +26,7 @@ import * as _ from 'underscore';
     fileName: string;
 
     constructor(
-      private service: ConfigService,
+      private service: SettingsService,
       public bsModalRef: BsModalRef,
       public settings: SettingsService
     ) {

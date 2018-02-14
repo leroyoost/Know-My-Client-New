@@ -16,9 +16,9 @@
             <fieldset>
                 <div *ngFor="let label of response?.jsonTable | keys">
                     <div class="form-group" *ngIf="response?.jsonTable[label]">
-                        <br/>
                         <label class="col-sm-3 control-label">{{label | cleanKey}}</label>
                         <label class="col-sm-3 control-label">{{response?.jsonTable[label] | titleCase}}</label>
+                        <br/>
                         <br/>
                     </div>
                 </div>
@@ -26,13 +26,13 @@
             <fieldset *ngIf="response">
                 <div class="row">
                     <div class="col-sm-4">
-                        <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
+                        <button (click)="createPdf()" class="btn btn-block btn-primary">View PDF</button>
                     </div>
                     <div class="col-sm-4">
-                        <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
+                        <button (click)="idVerify()" class="btn btn-block btn-primary">Retrieve Another ID</button>
                     </div>
                     <div class="col-sm-4">
-                        <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
+                        <button (click)="requestModalRef.hide()" class="btn btn-block btn-danger">Close</button>
                     </div>
                 </div>
             </fieldset>

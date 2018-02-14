@@ -10,7 +10,7 @@ import { UserService } from '../../core/user/user.service';
 export class HeaderComponent implements OnInit {
 
     currentTheme: any ;
-
+    user: any;
     isNavSearchVisible: boolean;
     @ViewChild('fsbutton') fsbutton;  // the fullscreen button
 
@@ -18,7 +18,8 @@ export class HeaderComponent implements OnInit {
       public userService: UserService,
       public themes: ThemesService) {
         this.currentTheme = themes.getDefaultTheme();
+        this.user = this.userService.getUser();
       }
-    ngOnInit() {
+      ngOnInit() {
     }
 }

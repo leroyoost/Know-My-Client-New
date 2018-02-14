@@ -6,6 +6,7 @@ export class User {
     companyId?: string;
     companyName?: string;
     sidemenu?: {};
+    isAdmin?: boolean;
 }
 
 

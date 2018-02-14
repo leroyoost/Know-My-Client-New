@@ -1,10 +1,10 @@
-//Modules
+// Modules
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { VerificationsModule } from './verifications/verifications.module';
 
-//Components
+// Components
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsersComponent } from './users/users.component';
@@ -15,13 +15,13 @@ import { ConfigComponent } from './config/config.component';
 import { AddCompanyComponent } from './config/companies/add/company-add-modal.component';
 import { AddListsComponent } from './config/lists/lists-add-modal.component';
 
-//Services
+// Services
 import { MenuService } from '../core/menu/menu.service';
 import { EventService } from './verifications/verifications.service';
 import { UsersService } from './users/users.service';
 import { ConfigService } from './config/config.service';
 
-//Models
+// Models
 import { routes } from './routes';
 
 

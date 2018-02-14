@@ -37,7 +37,7 @@ export class SettingsService {
         };
 
         // App Config from FireStore
-        //--------------------------------
+        // --------------------------------
 
         this.companiesRef = this.afs.collection('companies');
         this.companies$ = this.companiesRef.valueChanges();
@@ -108,7 +108,6 @@ export class SettingsService {
         }
     }
     setUserSetting(uid: string) {
-        //console.log(uid)
     }
     setLayoutSetting(name, value) {
         if (typeof this.layout[name] !== 'undefined') {

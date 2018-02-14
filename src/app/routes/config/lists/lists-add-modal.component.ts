@@ -12,7 +12,7 @@ import * as _ from 'underscore';
       selector: 'app-lists-add-modal',
       templateUrl: './lists-add-modal.component.html',
       styleUrls: ['../config.component.scss'],
-      providers: [ConfigService , SettingsService]
+      providers: [SettingsService , ConfigService]
   })
 
   export class AddListsComponent implements OnInit {

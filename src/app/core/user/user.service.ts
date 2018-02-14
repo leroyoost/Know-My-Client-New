@@ -8,56 +8,69 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class UserService {
 
-  user: firebase.User;
-  userConfig: Observable<{}>;
-  idToken: string;
+    user: any;
+    userConfig: Observable<{}>;
+    idToken: string;
 
-  constructor(
-    private afs: AngularFirestore,
-    private auth: AngularFireAuth,
-    private router: Router
-  ) {
+    constructor(
+        private afs: AngularFirestore,
+        private auth: AngularFireAuth,
+        private router: Router
+    ) {
+        this.user = this.getUser();
+    }
 
-    this.auth.auth.onAuthStateChanged(
-      user => {
-          if (user) {
-              console.log(user);
-              this.user = user;
-              user.getToken().then(token => {
-                this.idToken = token;
-              });
-              this.userConfig = this.afs.collection('users').doc(user.uid).valueChanges();
-              console.log(this.router.url);
-              if (this.router.url.indexOf('/login') > -1 ) {
-                  console.log('yes');
-                  this.router.navigate(['verifications']);
-              }
-          } else {
-              this.router.navigate(['login']);
-          }
-      },
-      err => {
-          console.log(err);
-          this.router.navigate(['login']);
-      }
-    );
-  }
+    getLegal() {
+        return this.afs.collection('config').doc('legal').valueChanges();
+    }
 
-  public isAdmin() {
-    return new Observable((observer => {
-        this.auth.auth.onAuthStateChanged(user => {
-            if (user) {
-                this.afs.collection('users').doc(user.uid).valueChanges().subscribe((details: any) => {
-                    console.log(details);
-                    observer.next(details.isAdmin);
+    getUser() {
+        return new Observable (($user) => {  this.auth.authState.subscribe(
+                (userResponse: firebase.User) => {
+                    console.log('authstate changed');
+                    if (userResponse) {
+                        this.afs.collection('users').doc(userResponse.uid).valueChanges().subscribe(
+                            (userConf: any) => {
+                                this.user = userConf;
+                                this.afs.collection('companies').doc(userConf.companyId).valueChanges().subscribe(
+                                    (companyInfo: any) => {
+                                        const newData = userConf;
+                                        newData.companyName = companyInfo.text;
+                                        newData.primary = companyInfo.primary;
+                                        newData.primary = companyInfo.secondary;
+                                        newData.logo = companyInfo.logo;
+                                        this.auth.idToken.subscribe(
+                                            idToken => {
+                                                newData.idToken = idToken;
+                                                $user.next (newData);
+                                            }
+                                        );
+                                    });
+                            },
+                            err => {
+                                console.log(err);
+                                return(err);
+                            }
+                        );
+                    } else {
+                        if (this.router.url.indexOf('/login') > -1) {
+                            this.router.navigate(['verifications']);
+                        } else {
+                            this.router.navigate(['login']);
+                            console.log('no user');
+                            return(null);
+                        }
+                    }
                 },
-            err => {
-                console.log(err);
-                observer.error(err);
+                err => {
+                    this.router.navigate(['login']);
+                    console.log(err);
+                    return(err);
+                });
             });
-            }
-        });
-    })
-    );
+    }
+    logout() {
+        this.auth.auth.signOut();
+    }
 }
-}
+

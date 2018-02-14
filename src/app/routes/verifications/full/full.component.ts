@@ -31,8 +31,7 @@ export class FullComponent implements OnInit {
   }
 
   public detailsModal(verification: Verification) {
-    this.userService.isAdmin().subscribe(isAdmin => {
-      if (isAdmin && verification.status === 'new') {
+      if (this.userService.user.isAdmin && verification.status === 'new') {
         this.loading = true;
         console.log('updating to pending');
         this.verificationService.updateVerification([], verification, 'pending')
@@ -47,9 +46,7 @@ export class FullComponent implements OnInit {
       console.log('deatilsModal Launched');
       this.DetailsModalRef = this.modalService.show(DetailsComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
       this.DetailsModalRef.content.verification = verification;
-      console.log(isAdmin);
-      this.DetailsModalRef.content.isAdmin = isAdmin;
-    });
+      this.DetailsModalRef.content.isAdmin = this.userService.user.isAdmin;
   }
 
   ngOnInit(): void {
