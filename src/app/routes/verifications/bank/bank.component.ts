@@ -11,10 +11,10 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-full',
-  templateUrl: './full.component.html',
-  styleUrls: ['./full.component.scss']
+  templateUrl: './bank.component.html',
+  styleUrls: ['./bank.component.scss']
 })
-export class FullComponent implements OnInit {
+export class BankComponent implements OnInit {
 
   verifications: Observable<{}>;
   DetailsModalRef: BsModalRef;
@@ -50,8 +50,8 @@ export class FullComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('FullComponent ngOnInit fired');
-    this.verifications = this.verificationService.getVerifications('verifications');
+    console.log('BankComponent ngOnInit fired');
+    this.verifications = this.verificationService.getVerifications('verifications_bank');
   }
 
 }

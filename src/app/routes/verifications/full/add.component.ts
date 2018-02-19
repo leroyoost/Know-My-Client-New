@@ -31,7 +31,6 @@ const swal = require('sweetalert');
     fileName: string;
     user: Observable<{}>;
     lists: Observable<any>;
-    accounts: Observable<[string]>;
     public options = {type : 'address', componentRestrictions: { country: 'ZA' }};
     loading = false;
 

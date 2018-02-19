@@ -1,8 +1,8 @@
-<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '6px' }"></ngx-loading>
 <div class="modal-body">
     <!-- <tabset [justified]="true"> -->
     <div>
-        <h3>New Verification</h3>
+        <h3>New Investigation</h3>
         <!-- <ng-template tabHeading>New Verification</ng-template> -->
         <div *ngIf="lists|async as lsts$">
             <section>
@@ -318,7 +318,7 @@
             <fieldset>
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-4"><a (click)="saveVerification()" class="button btn btn-block btn-success">Submit Verification</a>
+                    <div class="col-sm-4"><a (click)="saveVerification()" class="button btn btn-block btn-success">Submit Investigation</a>
                     </div>
                     <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
                     </div>

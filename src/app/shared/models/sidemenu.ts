@@ -1,7 +1,7 @@
 export const SideMenu = [
     {
         'text': 'TEST ENVIRONMENT',
-        'link': '/app/dashboard',
+        'link': '/app/verification/full',
         'icon': 'icon-alert',
         'active' : false
     },

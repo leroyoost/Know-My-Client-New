@@ -1,3 +1,4 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '6px' }"></ngx-loading>
 <div class="modal-body">
     <tabset [justified]="true" type="pills">
         <tab>
@@ -13,131 +14,44 @@
                     <div class="col-sm-3"></div>
                 </div>
             </fieldset>
-            <fieldset>
-                <div *ngFor="let label of response?.jsonTable | keys">
-                    <div class="form-group" *ngIf="response?.jsonTable[label]">
+            <fieldset *ngIf="verifyResponse">
+                <div *ngFor="let label of verifyResponse?.jsonTable | keys">
+                    <div class="form-group" *ngIf="verifyResponse?.jsonTable[label]">
                         <label class="col-sm-3 control-label">{{label | cleanKey}}</label>
-                        <label class="col-sm-3 control-label">{{response?.jsonTable[label] | titleCase}}</label>
+                        <label class="col-sm-3 control-label">{{verifyResponse?.jsonTable[label] | titleCase}}</label>
                         <br/>
                         <br/>
                     </div>
                 </div>
             </fieldset>
-            <fieldset *ngIf="response">
+            <fieldset *ngIf="verifyResponse">
                 <div class="row">
                     <div class="col-sm-4">
-                        <button (click)="createPdf()" class="btn btn-block btn-primary">View PDF</button>
+                        <button (click)="createPdf(verifyResponse)" class="btn btn-block btn-info">View PDF</button>
                     </div>
                     <div class="col-sm-4">
-                        <button (click)="idVerify()" class="btn btn-block btn-primary">Retrieve Another ID</button>
+                        <button (click)="idVerify(data.idNo)" class="btn btn-block btn-success">Retrieve Another ID</button>
                     </div>
                     <div class="col-sm-4">
                         <button (click)="requestModalRef.hide()" class="btn btn-block btn-danger">Close</button>
                     </div>
                 </div>
             </fieldset>
-        </tab>
-        <tab>
-            <ng-template tabHeading>Bank Verification</ng-template>
-            <fieldset>
-                <br/>
-                <br/>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Title</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="tile" [(ngModel)]="data.Title" class="form-control" />
+            <fieldset *ngIf="!verifyResponse">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <button (click)="idVerify(data.idNo)" class="btn btn-block btn-success">Retrieve</button>
                     </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Initials</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="initials" [(ngModel)]="data.Initials" class="form-control" />
+                    <div class="col-sm-4">
+                        <button (click)="requestModalRef.hide()" class="btn btn-block btn-danger">Close</button>
                     </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Surname</label>
-                    <div class="col-sm-6">
-                        <input type="text" name="surname" [(ngModel)]="data.Surname" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">ID Number</label>
-                    <div class="col-sm-6">
-                        <input type="phone" name="idNo" [(ngModel)]="data.ID_Number" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Bank Name</label>
-                    <div class="col-sm-6">
-                        <select name="bankName" [(ngModel)]="data.Bank_Name" class="form-control">
-                             <option>Absa Bank</option>
-                             <option>African Bank Limited</option>
-                             <option>Bidvest Bank Limited</option>
-                             <option>Capitec Bank</option>
-                             <option>Commercial Bank of South Africa PLC</option>
-                             <option>First National Bank</option>
-                             <option>Grindrod Limited</option>
-                             <option>Imperial Bank South Africa</option>
-                             <option>Investec Bank Limited</option>
-                             <option>Nedbank Limited</option>
-                             <option>Merchantile Bank</option>
-                             <option>Rand Merchant Bank</option>
-                             <option>Sasfin Bank Limited</option>
-                             <option>Standard Bank</option>
-                             <option>Teba Bank Limited</option>
-                          </select>
-                    </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Account Type</label>
-                    <div class="col-sm-6">
-                        <select name="accType" [(ngModel)]="data.Account_Type" class="form-control">
-                             <option>Cheque</option>
-                             <option>Savings</option>
-                             <option>Bond</option>
-                             <option>Credit Card</option>
-                             <option>Transmission</option>
-                          </select>
-                    </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Account Number</label>
-                    <div class="col-sm-3">
-                        <input type="phone" name="accNo" [(ngModel)]="data.Account_Number" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
-                    <br/>
-                    <br/>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Branch</label>
-                    <div class="col-sm-3">
-                        <input type="phone" name="branch" [(ngModel)]="data.Branch" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-2"></div>
                 </div>
             </fieldset>
         </tab>
         <tab>
-            <ng-template tabHeading>ID Check</ng-template>
+            <ng-template tabHeading>Consumer Trace</ng-template>
             <fieldset>
                 <div class="form-group">
                     <br/>
@@ -149,84 +63,64 @@
                     <div class="col-sm-3"></div>
                 </div>
                 <div class="form-group">
-                    <br/>
-                    <br/>
-                    <label class="col-sm-3 control-label">First Name</label>
-                    <div class="col-sm-6">
-                        <input type="text" [(ngModel)]="data.firstName" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
-                </div>
-                <div class="form-group">
-                    <br/>
-                    <br/>
-                    <label class="col-sm-3 control-label">Surname</label>
-                    <div class="col-sm-6">
-                        <input type="text" [(ngModel)]="data.surname" class="form-control" />
-                    </div>
-                    <div class="col-sm-3"></div>
-                </div>
-                <div class="form-group">
-                    <br/>
-                    <br/>
-                    <br/>
-                    <div *ngIf="response">
+                    <div *ngIf="traceResponse">
+                        <br/>
+                        <br/>
+                        <br/>
                         <h3>Personal Details</h3>
-                        <div *ngFor="let section of response?.jsonTable.data?.personal">
-                            <div *ngFor="let record of section">
-                                <div *ngFor="let line of record">
-                                    <label class="col-sm-3 control-label">{{line.index}}</label>
-                                    <label class="col-sm-3 control-label">{{line.data}}</label>
-                                    <br/>
-                                </div>
+                        <div *ngFor="let section of traceResponse.data.personal">
+                            <div *ngFor="let record of section?.data">
+                                <label class="col-sm-3 control-label">{{record.index}}</label>
+                                <label class="col-sm-9 control-label">{{record.data}}</label>
+                                <br/>
                             </div>
+                            <br/>
                         </div>
                         <h3>Most Recent Addresses</h3>
-                        <div *ngFor="let section of response?.jsonTable.data?.address">
+                        <div *ngFor="let section of traceResponse?.data?.address">
                             <div class="col sm-6">
-                                <div *ngFor="let record of section">
-                                    <label *ngFor="let line of record" class="col-sm-12 control-label">{{line.data}}</label>
+                                <div *ngFor="let record of section?.data">
+                                    <label class="col-sm-12 control-label">{{record.data}}</label>
                                 </div>
                             </div>
                             <br/>
                         </div>
                         <h3>Most Recent Contact Details</h3>
-                        <div *ngFor="let section of response?.jsonTable.data?.telephone">
-                            <div *ngFor="let record of section">
-                                <label *ngFor="let line of record" class="col-sm-3 control-label">{{line.data}}</label>
-                                <br/>
-                            </div>
+                        <div *ngFor="let section of traceResponse?.data?.telephone">
+                            <label *ngFor="let record of section?.data" class="col-sm-6 control-label">{{record.data}}</label>
+                            <br/>
                         </div>
                         <br/>
                         <br/>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <button (click)="viewPdf()" class="btn btn-block btn-primary">View PDF</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button (click)="retrieve()" class="btn btn-block btn-primary">Retrieve Another ID</button>
-                            </div>
-                            <div class="col-sm-4">
-                                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
-                            </div>
-                        </div>
                     </div>
+                </div>
+            </fieldset>
+            <fieldset *ngIf="traceResponse">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <button (click)="createPdf(traceResponse)" class="btn btn-block btn-info">View PDF</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button (click)="idTrace(data.idNo)" class="btn btn-block btn-success">Retrieve Another ID</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button (click)="requestModalRef.hide()" class="btn btn-block btn-danger">Close</button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset *ngIf="!traceResponse">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-4">
+                        <button (click)="idTrace(data.idNo)" class="btn btn-block btn-success">Retrieve</button>
+                    </div>
+                    <div class="col-sm-4">
+                        <button (click)="requestModalRef.hide()" class="btn btn-block btn-danger">Close</button>
+                    </div>
+                    <div class="col-sm-2"></div>
                 </div>
             </fieldset>
         </tab>
     </tabset>
-    <div *ngIf="!response">
-        <div class="row">
-            <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <button (click)="idVerify(data.idNo)" class="btn btn-block btn-primary">Retrieve</button>
-            </div>
-            <div class="col-sm-4">
-                <button (click)="cancel()" class="btn btn-block btn-danger">Close</button>
-            </div>
-            <div class="col-sm-2"></div>
-        </div>
-    </div>
-    <br/>
-    <br/>
 </div>

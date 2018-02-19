@@ -5,21 +5,21 @@ import { SharedModule } from '../../shared/shared.module';
 
 // Modules
 import { FullModule } from './full/full.module';
-// import { BankModule } from './bank/bank.module';
+import { BankModule } from './bank/bank.module';
 // import { TraceModule } from './trace/trace.module';
 
 // Components
 import { FullComponent } from './full/full.component';
-// import { BankComponent } from './bank/bank.component';
+import { BankComponent } from './bank/bank.component';
 // import { TraceComponent } from './trace/trace.component';
 
 // Services
 import { VerificationService } from './verifications.service';
 import { PdfService } from './pdf.service';
 const routes: Routes = [
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'full', component: FullComponent }
-  // { path: 'bank', component: BankComponent },
+  { path: '', redirectTo: 'app/verification/full', pathMatch: 'full' },
+  { path: 'full', component: FullComponent },
+  { path: 'bank', component: BankComponent }
   // { path: 'trace', component: TraceComponent }
 ];
 
@@ -28,7 +28,7 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     FullModule,
-    // BankModule,
+    BankModule,
     // TraceModule,
     RouterModule.forChild(routes)
   ],

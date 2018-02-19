@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
                 this.afAuth.auth
                 .signInWithEmailAndPassword(this.email, this.password)
                 .then(value => {
-                    this.router.navigate(['app/dashboard']);
+                    this.router.navigate(['app/verification/full']);
                 })
                 .catch(err => {
                     this.alerts.push({

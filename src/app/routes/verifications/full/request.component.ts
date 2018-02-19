@@ -18,7 +18,9 @@ export class RequestComponent {
   verification: any = {};
   isAdmin = false;
   data: any = {};
-  response: any;
+  traceResponse: any;
+  verifyResponse: any;
+  loading = false;
 
   constructor(
     public requestModalRef: BsModalRef,
@@ -30,17 +32,33 @@ export class RequestComponent {
     console.log('RequestComponent Lanuched');
   }
 
-  createPdf() {
-    this.pdf.generatePdf(this.response , this.verification.ref);
+  createPdf(data) {
+    this.pdf.generatePdf(data, this.verification.ref);
   }
 
   idVerify(idNo) {
+    this.loading = true;
     this.verificationService.apiCall('idVerify', { 'idNo': idNo })
       .then(response => {
+        this.loading = false;
         console.log(response);
-        this.response = response;
+        this.verifyResponse = response;
       })
       .catch(err => {
+        this.loading = false;
+        console.log(err);
+      });
+  }
+  idTrace(idNo) {
+    this.loading = true;
+    this.verificationService.apiCall('idTrace', { 'idNo': idNo })
+      .then(response => {
+        this.loading = false;
+        console.log(response);
+        this.traceResponse = response;
+      })
+      .catch(err => {
+        this.loading = false;
         console.log(err);
       });
   }

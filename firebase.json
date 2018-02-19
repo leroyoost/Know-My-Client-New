@@ -1,24 +1,40 @@
 {
   "hosting": {
     "public": "dist",
-    "rewrites": [ {
-      "source": "https://secure.knowmyclient.com/api/idVerify", "function": "idVerify"
-    },
-    {
-      "source": "https://secure.knowmyclient.com/api/bankVerify", "function": "bankVerify"
-    } ],
+    "rewrites": [
+      {
+        "source": "/api/bankSubmit",
+        "function": "bankSubmit"
+      },
+      {
+        "source": "/api/idVerify",
+        "function": "idVerify"
+      },
+      {
+        "source": "/api/bankRequest",
+        "function": "bankRequest"
+      },
+      {
+        "source": "/api/idTrace",
+        "function": "idTrace"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "headers": [ {
-      "source" : "**",
-      "headers" : [ {
-        "key" : "x-frame-options",
-        "value" : "DENY"
-      } ]
-    } ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "x-frame-options",
+            "value": "DENY"
+          }
+        ]
+      }
+    ],
     "cleanUrls": true,
     "trailingSlash": false
   }

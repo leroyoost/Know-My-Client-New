@@ -21,7 +21,7 @@ export const routes = [
     { path: 'login', component: LoginComponent },
 
     // Not found
-    { path: '**', redirectTo: 'app/dashboard' }
+    { path: '**', redirectTo: 'app/verification/full' }
 
 ];
 

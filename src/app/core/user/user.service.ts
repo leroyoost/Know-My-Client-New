@@ -31,7 +31,6 @@ export class UserService {
                     if (userResponse) {
                         this.afs.collection('users').doc(userResponse.uid).valueChanges().subscribe(
                             (userConf: any) => {
-                                this.user = userConf;
                                 this.afs.collection('companies').doc(userConf.companyId).valueChanges().subscribe(
                                     (companyInfo: any) => {
                                         const newData = userConf;
@@ -42,6 +41,7 @@ export class UserService {
                                         this.auth.idToken.subscribe(
                                             idToken => {
                                                 newData.idToken = idToken;
+                                                this.user = userConf;
                                                 $user.next (newData);
                                             }
                                         );

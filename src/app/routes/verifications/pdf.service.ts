@@ -21,7 +21,7 @@ export class PdfService {
     }
 
     generatePdf(data, ref) {
-        const pdfFooter = 220;
+        const pdfFooter = 150;
         this.user.getUser().subscribe((user: any) => {
             console.log(user);
             this.user.getLegal().subscribe((legal: any) => {

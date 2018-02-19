@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  cloudFunctions: 'https://secure.knowmyclient.com/api/',
   firebase: {
     apiKey: 'AIzaSyAQAyyMpnx0h7ylIElBoLONyHEr1ROqs4o',
     authDomain: 'knowmyclient-1501076246449.firebaseapp.com',

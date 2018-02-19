@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 import { SettingsService } from '../../core/settings/settings.service';
 import { UserService } from '../../core/user/user.service';
 import { AngularFirestore } from 'angularfire2/firestore';
@@ -109,8 +110,7 @@ export class VerificationService {
       this.auth.auth.onAuthStateChanged(user => {
         if (user) {
           this.afs.collection('users').doc(user.uid).valueChanges().subscribe((response: any) => {
-            const veriRef = this.afs.collection('verifications');
-            this.afs.collection('verifications', ref => ref.where('type', '==', veriType)).valueChanges().subscribe(verifications => {
+            this.afs.collection(veriType).valueChanges().subscribe(verifications => {
               console.log(verifications);
               observer.next(verifications);
             });
@@ -258,6 +258,12 @@ export class VerificationService {
   }
 
   public apiCall (endpoint: string, data: {}) {
-    return this.http.post('https://secure.knowmyclient.com/api/' + endpoint, data).toPromise();
+    const idToken = this.userService.user ? this.userService.user.idToken : null;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${idToken}`
+      })
+    };
+    return this.http.post(environment.cloudFunctions + endpoint, data, httpOptions).toPromise();
   }
 }

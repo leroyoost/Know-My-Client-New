@@ -5,6 +5,7 @@
 
 export const environment = {
   production: false,
+  cloudFunctions: 'https://us-central1-knowmyclienttest.cloudfunctions.net/',
   firebase: {
     apiKey: 'AIzaSyDO4-QD6D_ymSs5MkSoHu7EE_BRsgCKEbQ',
     authDomain: 'knowmyclienttest.firebaseapp.com',

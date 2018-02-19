@@ -7,7 +7,7 @@ export class CleanKeyPipe implements PipeTransform {
             return '';
         } else {
             const wordList = input.split('_');
-            const lowerWords = ['on', 'of'];
+            const lowerWords = ['on', 'of', 'to'];
             const upperWords = ['id'];
             let output = '';
             wordList.forEach(word => {
