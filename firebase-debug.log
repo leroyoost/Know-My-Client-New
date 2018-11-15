@@ -1,0 +1,32 @@
+[debug] [2018-07-13T07:52:27.046Z] ----------------------------------------------------------------------
+[debug] [2018-07-13T07:52:27.047Z] Command:       /usr/local/bin/node /usr/local/bin/firebase serve
+[debug] [2018-07-13T07:52:27.048Z] CLI Version:   3.19.3
+[debug] [2018-07-13T07:52:27.048Z] Platform:      darwin
+[debug] [2018-07-13T07:52:27.048Z] Node Version:  v10.6.0
+[debug] [2018-07-13T07:52:27.048Z] Time:          Fri Jul 13 2018 09:52:27 GMT+0200 (South Africa Standard Time)
+[debug] [2018-07-13T07:52:27.048Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-07-13T07:52:27.055Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-07-13T07:52:27.055Z] > authorizing via signed-in user
+[debug] [2018-07-13T07:52:27.057Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/knowmyclienttest  
+  
+ Fri Jul 13 2018 09:52:27 GMT+0200 (South Africa Standard Time)
+[debug] [2018-07-13T07:52:28.263Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-13T07:52:28.264Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/knowmyclienttest/tokens  
+  
+ Fri Jul 13 2018 09:52:28 GMT+0200 (South Africa Standard Time)
+[debug] [2018-07-13T07:52:29.371Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-13T07:52:29.372Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/knowmyclienttest  
+  
+ Fri Jul 13 2018 09:52:29 GMT+0200 (South Africa Standard Time)
+[debug] [2018-07-13T07:52:30.102Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/leroyoosthuyzen/Desktop/Code/know-my-client'...
+[info] 
+[debug] [2018-07-13T07:52:30.104Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/928891964975/clients/_:getWebAppConfig  
+  
+ Fri Jul 13 2018 09:52:30 GMT+0200 (South Africa Standard Time)
+[debug] [2018-07-13T07:52:31.126Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: dist
+[info] ✔  hosting: Local server: http://localhost:5000
+

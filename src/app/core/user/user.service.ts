@@ -29,6 +29,10 @@ export class UserService {
                 (userResponse: firebase.User) => {
                     console.log('authstate changed');
                     if (userResponse) {
+                        console.log(userResponse.uid);
+                        this.afs.collection('users').doc(userResponse.uid).update({lastLogin: new Date().getTime()})
+                            .then(response => {console.log('login captured successfully: ' + response); })
+                            .catch(err => {console.log('error capturing login: ' + err.message); });
                         this.afs.collection('users').doc(userResponse.uid).valueChanges().subscribe(
                             (userConf: any) => {
                                 this.afs.collection('companies').doc(userConf.companyId).valueChanges().subscribe(

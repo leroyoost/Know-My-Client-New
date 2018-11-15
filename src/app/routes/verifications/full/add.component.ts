@@ -31,6 +31,7 @@ const swal = require('sweetalert');
     fileName: string;
     user: Observable<{}>;
     lists: Observable<any>;
+    submitDisabled: boolean;
     public options = {type : 'address', componentRestrictions: { country: 'ZA' }};
     loading = false;
 
@@ -40,6 +41,7 @@ const swal = require('sweetalert');
       private userService: UserService,
       private settings: SettingsService
     ) {
+      this.submitDisabled = true;
         console.log('AddVerificationComponent Lanuched');
         this.verification.ref = verificationService.generaterRef();
       }

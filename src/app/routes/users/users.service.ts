@@ -34,6 +34,10 @@ export class UsersService {
         };
         return (this.afs.collection('users').add(user));
     }
+
+    public resetPassword(user) {
+        return this.afAuth.auth.sendPasswordResetEmail(user.email);
+    }
     public updateUser(user) {
         user.updated = {
             uid: this.afAuth.auth.currentUser.uid,

@@ -22,14 +22,13 @@ export class EventService {
     private userService: UserService
   ) { }
 
-  public getEvent(ref: string, note: string, attachment: any[]) {
-    const user = this.userService.user.displayName;
+  public getEvent(ref: string, note: string, attachment: any[], user) {
     return {
       new: {
         'created': new Date().getTime(),
         'heading': user + ' submitted a new verification',
         'primary': 'The details have been sent to Know My Client with reference number ' + ref,
-        'secondary': note,
+        'secondary': note ? note : '',
         'icon': 'icon-plus',
         'colour': 'info',
         'attachment': attachment
@@ -45,7 +44,7 @@ export class EventService {
         'created': new Date().getTime(),
         'heading': 'Verification successful',
         'primary': 'The identitiy details submitted have been confirmed',
-        'secondary': note,
+        'secondary': note ? note : '',
         'icon': 'icon-check',
         'colour': 'success',
         'attachment': attachment
@@ -79,6 +78,7 @@ export class VerificationService {
   currentUpload: Upload;
   uploads: Observable<any>;
   test: Observable<any>;
+  user: any;
   constructor(
     private afs: AngularFirestore,
     private afStorage: AngularFireStorage,
@@ -124,7 +124,6 @@ export class VerificationService {
   }
 
   uploadFiles(uploadQue, companyId, ref): Promise<any> {
-
     console.log('uploadFiles Fired');
     if (uploadQue.length > 0) {
       const promiseList = [];
@@ -164,7 +163,7 @@ export class VerificationService {
   createFileEvent(fileList, ref, status, note?) {
     console.log('createFileEvent Fired');
     console.log(fileList);
-    return (this.eventService.getEvent(ref, note, fileList)[status]);
+    return (this.eventService.getEvent(ref, note, fileList, this.user.displayName)[status]);
   }
 
   getCoId(uid) {
@@ -189,6 +188,8 @@ export class VerificationService {
       this.auth.auth.onAuthStateChanged(
         user => {
           if (user) {
+            console.log(user.uid);
+            this.user = user;
             res(user.uid);
           } else {}
         },
@@ -227,13 +228,14 @@ export class VerificationService {
     verification.notes = [];
     verification.created_date = new Date().getTime();
     verification.type = veriType;
-    verification.created_uid = this.userService.user.uid;
-    verification.created_name = this.userService.user.displayName;
     verification.status = 'new';
 
     return this.fileHandler(uploadQue, verification.ref, verification.status, note)
       .then(fileEvent => {
+        verification.created_uid = this.user.uid;
+        verification.created_name = this.user.displayName;
         verification.events.push(fileEvent);
+        console.log(verification);
         return (this.afs.collection('verifications').add(verification));
       })
       .catch(err => {
@@ -255,6 +257,11 @@ export class VerificationService {
         })
       );
     });
+  }
+  public createBankVerification (verification) {
+    verification.status = 'new';
+    verification.created_date = new Date().getTime();
+    return this.afs.collection('verifications_bank').add(verification);
   }
 
   public apiCall (endpoint: string, data: {}) {

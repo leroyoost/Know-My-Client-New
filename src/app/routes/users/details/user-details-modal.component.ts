@@ -23,6 +23,24 @@ const swal = require('sweetalert');
       console.log('DetailsModalComponent Lanuched');
     }
 
+    resetPassword() {
+      this.loading = true;
+      console.log(this.user);
+      this.usersService.resetPassword(this.user)
+        .then(result => {
+          this.loading = false;
+          swal('Success!', 'User password reset - email sent', 'success');
+          this.bsModalRef.hide();
+          console.log(result);
+        })
+        .catch(err => {
+          console.log(err);
+          this.loading = false;
+          swal('Error!', err, 'error');
+        });
+    }
+
+
     updateUser() {
       this.loading = true;
       this.usersService.updateUser(this.user)

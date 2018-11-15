@@ -1,104 +1,184 @@
 <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '6px' }"></ngx-loading>
 <div class="modal-body">
-    <!-- <tabset [justified]="true"> -->
-    <div>
-        <h3>New Bank Verification</h3>
-        <!-- <ng-template tabHeading>New Verification</ng-template> -->
-        <div *ngIf="lists|async as lsts$">
-            <section>
+    <tabset [justified]="true" type="pills">
+            <tab heading="Personal Account" class="mt-2" (select)='verification = { "ref": ref}'>                
+            <div *ngIf="lists|async as lsts$">
+                <section>
+                    <fieldset>
+                        <br/>
+                        <br/>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Reference</label>
+                            <div class="col-sm-6">
+                                <h5>{{verification.ref}}</h5>
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Title</label>
+                            <div class="col-sm-2">
+                                <select name="title" [(ngModel)]="verification.title" class="form-control">
+                                <option *ngFor="let title of lsts$?.title">{{title}}</option>
+                        </select>
+                            </div>
+                            <label class="col-sm-2 control-label">Initials</label>
+                            <div class="col-sm-2">
+                                <input type="text" name="initials" [(ngModel)]="verification.initials" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Surname</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="surname" [(ngModel)]="verification.surname" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">ID Number</label>
+                            <div class="col-sm-6">
+                                <input type="phone" name="idNo" [(ngModel)]="verification.id_number" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Bank Name</label>
+                            <div class="col-sm-6">
+                                <select name="bank" [(ngModel)]="verification.bank" class="form-control">
+                                <option *ngFor="let bank of lsts$?.banks">{{bank}}</option>
+                            </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Type</label>
+                            <div class="col-sm-6">
+                                <select name="accType" [(ngModel)]="verification.account_type" class="form-control">
+                                <option *ngFor="let account of lsts$?.accounts">{{account}}</option>
+                        </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Number</label>
+                            <div class="col-sm-3">
+                                <input type="phone" name="accNo" [(ngModel)]="verification.account_number" class="form-control" />
+                            </div>
+                            <label class="col-sm-1 control-label">Branch</label>
+                            <div class="col-sm-2">
+                                <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </fieldset>
+                </section>
+
                 <fieldset>
-                    <br/>
-                    <br/>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">Reference</label>
-                        <div class="col-sm-6">
-                            <h5>{{verification.ref}}</h5>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a (click)="saveVerification('personal')" class="button btn btn-block btn-success">Submit Verification</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
                         </div>
                         <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab>
+        <tab heading="Business Account" class="mt-2" (select)='verification = {"initials": " ", "ref": ref}'>                
+            <div *ngIf="lists|async as lsts$">
+                <section>
+                    <fieldset>
                         <br/>
                         <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">Title</label>
-                       <div class="col-sm-2">
-                        <select name="title" [(ngModel)]="verification.title" class="form-control">
-                            <option *ngFor="let title of lsts$?.title">{{title}}</option>
-                      </select>
-                       </div>
-                       <label class="col-sm-2 control-label">Initials</label>
-                       <div class="col-sm-2">
-                          <input type="text" name="initials" [(ngModel)]="verification.initials" class="form-control" />
-                       </div>
-                       <div class="col-sm-3"></div>
-                       <br/>
-                       <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">Surname</label>
-                       <div class="col-sm-6">
-                          <input type="text" name="surname" [(ngModel)]="verification.surname" class="form-control" />
-                       </div>
-                       <div class="col-sm-3"></div>
-                       <br/>
-                       <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">ID Number</label>
-                       <div class="col-sm-6">
-                          <input type="phone" name="idNo" [(ngModel)]="verification.id_number" class="form-control" />
-                       </div>
-                       <div class="col-sm-3"></div>
-                       <br/>
-                       <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">Bank Name</label>
-                       <div class="col-sm-6">
-                        <select name="bank" [(ngModel)]="verification.bank" class="form-control">
-                            <option *ngFor="let bank of lsts$?.banks">{{bank}}</option>
-                          </select>
-                       </div>
-                       <div class="col-sm-3"></div>
-                       <br/>
-                       <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">Account Type</label>
-                       <div class="col-sm-6">
-                        <select name="accType" [(ngModel)]="verification.account_type" class="form-control">
-                            <option *ngFor="let account of lsts$?.accounts">{{account}}</option>
-                      </select>
-                       </div>
-                       <div class="col-sm-3"></div>
-                       <br/>
-                       <br/>
-                    </div>
-                    <div class="form-group">
-                       <label class="col-sm-3 control-label">Account Number</label>
-                       <div class="col-sm-3">
-                          <input type="phone" name="accNo" [(ngModel)]="verification.account_number" class="form-control" />
-                       </div>
-                       <label class="col-sm-1 control-label">Branch</label>
-                       <div class="col-sm-2">
-                          <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
-                       </div>
-                       <div class="col-sm-3"></div>
-                    </div>
-                 </fieldset>
-            </section>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Reference</label>
+                            <div class="col-sm-6">
+                                <h5>{{verification.ref}}</h5>
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Company Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="surname" [(ngModel)]="verification.surname" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Company Registartion Number</label>
+                            <div class="col-sm-6">
+                                <input type="phone" name="idNo" [(ngModel)]="verification.id_number" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Bank Name</label>
+                            <div class="col-sm-6">
+                                <select name="bank" [(ngModel)]="verification.bank" class="form-control">
+                                    <option *ngFor="let bank of lsts$?.banks">{{bank}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Type</label>
+                            <div class="col-sm-6">
+                                <select name="accType" [(ngModel)]="verification.account_type" class="form-control">
+                                    <option *ngFor="let account of lsts$?.accounts">{{account}}</option>
+                            </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br/>
+                            <br/>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Number</label>
+                            <div class="col-sm-3">
+                                <input type="phone" name="accNo" [(ngModel)]="verification.account_number" class="form-control" />
+                            </div>
+                            <label class="col-sm-1 control-label">Branch</label>
+                            <div class="col-sm-2">
+                                <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </fieldset>
+                </section>
 
-            <fieldset>
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4"><a (click)="saveVerification()" class="button btn btn-block btn-success">Submit Verification</a>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a (click)="saveVerification('business')" class="button btn btn-block btn-success">Submit Verification</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
+                        </div>
+                        <div class="col-sm-2"></div>
                     </div>
-                    <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
-                    </div>
-                    <div class="col-sm-2"></div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
+                </fieldset>
+            </div>
+        </tab>
+    </tabset>
     <!-- </tab> -->
     <!-- <tab>
             <ng-template tabHeading>Capture Batch</ng-template>

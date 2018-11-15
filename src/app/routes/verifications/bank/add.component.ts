@@ -25,6 +25,7 @@ export class AddComponent implements OnInit {
   verification: any = {};
   user: Observable<{}>;
   lists: Observable<any>;
+  ref: string;
   public options = { type: 'address', componentRestrictions: { country: 'ZA' } };
   loading = false;
 
@@ -35,17 +36,20 @@ export class AddComponent implements OnInit {
     private settings: SettingsService
   ) {
     console.log('AddBankComponent Lanuched');
-    this.verification.ref = verificationService.generaterRef();
+    this.ref = verificationService.generaterRef();
+    this.verification.ref = this.ref;
   }
 
-  public saveVerification() {
+  public saveVerification(type: string) {
     this.loading = true;
-    this.verificationService.apiCall('bankSubmit', this.verification)
+    this.verification.type = type;
+    this.verificationService.createBankVerification(this.verification)
       .then((response: any) => {
         console.log('firestore response received:');
         console.log(response);
         this.verification = {};
-        this.verification.ref = this.verificationService.generaterRef();
+        this.ref = this.verificationService.generaterRef();
+        this.verification.ref = this.ref;
         this.loading = false;
         swal('Success!', 'Verification Created', 'success');
       },

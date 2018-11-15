@@ -15,7 +15,7 @@
                   <th>Surname</th>
                   <th>Email</th>
                   <th>Company</th>
-                  <th>Last Login</th>
+                  <th>Last Active</th>
                   <th>Created By</th>
                   <th>Last Update</th>
               </tr>
@@ -26,7 +26,7 @@
                   <td>{{user.surname}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.companyName}}</td>
-                  <td>{{user.login}}</td>
+                  <td>{{user.lastLogin | date: "dd-MMM-yyyy H:mm"}}</td>
                   <td>{{user.created.name}}</td>
                   <td>{{user.created.time | date: "dd-MMM-yyyy H:mm"}}</td>
               </tr>

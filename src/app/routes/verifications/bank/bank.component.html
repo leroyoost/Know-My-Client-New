@@ -12,7 +12,7 @@
           <thead>
               <tr>
                   <th>Reference</th>
-                  <th>Surname</th>
+                  <th>API Environment</th>
                   <th>ID Number</th>
                   <th>Account Number</th>
                   <th>Date Created</th>
@@ -23,7 +23,7 @@
           <tbody>
               <tr *ngFor="let item of verifications | async | orderBy: '-created_date'" (click)="detailsModal(item)">
                   <td>{{item.ref}}
-                  <td>{{item.surname}}</td>
+                  <td>{{item.userName}}</td>
                   <td>{{item.id_number}}</td>
                   <td>{{item.account_number}}</td>
                   <td>{{item.created_date | date: "dd-MMM-yyyy H:mm"}}</td>

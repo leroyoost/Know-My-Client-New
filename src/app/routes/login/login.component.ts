@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
 
     loginWithEmail() {
         if (this.valForm.valid) {
-            this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+            this.afAuth.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(() => {
                 this.afAuth.auth
                 .signInWithEmailAndPassword(this.email, this.password)

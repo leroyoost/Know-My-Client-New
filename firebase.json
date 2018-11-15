@@ -3,16 +3,24 @@
     "public": "dist",
     "rewrites": [
       {
-        "source": "/api/bankSubmit",
-        "function": "bankSubmit"
+        "source": "/api/avsSubmit",
+        "function": "avsSubmit"
+      },
+      {
+        "source": "/api/bulkAvsSubmit",
+        "function": "bulkAvsSubmit"
+      },
+      {
+        "source": "/api/avsClientWrite",
+        "function": "avsClientWrite"
       },
       {
         "source": "/api/idVerify",
         "function": "idVerify"
       },
       {
-        "source": "/api/bankRequest",
-        "function": "bankRequest"
+        "source": "/api/avsStatus",
+        "function": "avsStatus"
       },
       {
         "source": "/api/idTrace",

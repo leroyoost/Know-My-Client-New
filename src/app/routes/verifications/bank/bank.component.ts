@@ -31,18 +31,6 @@ export class BankComponent implements OnInit {
   }
 
   public detailsModal(verification: Verification) {
-      if (this.userService.user.isAdmin && verification.status === 'new') {
-        this.loading = true;
-        console.log('updating to pending');
-        this.verificationService.updateVerification([], verification, 'pending')
-          .then(response => {
-            this.loading = false;
-          })
-          .catch(err => {
-            console.log(err);
-            this.loading = false;
-          });
-      }else {this.loading = false; }
       console.log('deatilsModal Launched');
       this.DetailsModalRef = this.modalService.show(DetailsComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
       this.DetailsModalRef.content.verification = verification;
