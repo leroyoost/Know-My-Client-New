@@ -1,0 +1,259 @@
+<div class="modal-body">
+        <h3>Verification Details</h3>
+        <br/>
+        <fieldset>
+                <div class="form-group">
+                        <label class="col-sm-1 em fa fa-fw"></label>
+                        <label class="col-sm-3 control-label">Batch Number</label>
+                        <label class="col-sm-3 control-label">{{verification.ref}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="verification.status === 'successfully_verified'" class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="verification.status === 'unable_to_verify'" class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Verification Status</label>
+                        <label class="col-sm-3 control-label">{{verification.status | cleanKey}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div *ngIf="verification.status === 'data_error'" class="form-group">
+                        <label class="col-sm-1 em fa fa-fw"></label>
+                        <label class="col-sm-3 control-label text-danger">Error Message</label>
+                        <label class="col-sm-6 control-label text-danger">{{verification.errorReason}}</label>
+                        <div *ngIf="verification.errorReason === 'AVSR timed out, no response from the Bank'" class="col-sm-2"><a href="" ng-click="details.resubmit()" class="button btn btn-block btn-success">Retry</a>
+                        </div>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-1 em fa fa-fw"></label>
+                        <label class="col-sm-3 control-label">Date Created</label>
+                        <label class="col-sm-3 control-label">{{verification.created_date | date: "dd-MMM-yy"}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-1 em fa fa-fw"></label>
+                        <label class="col-sm-3 control-label">Last Updated</label>
+                        <label class="col-sm-3 control-label">{{verification.updated_date | date: "dd-MMM-yy"}}</label>
+                        <br/>
+                        <br/>
+                </div>
+        </fieldset>
+        <fieldset>
+                <div class="form-group" *ngIf="verification.type === 'private'">
+                        <label class="col-sm-1 em fa fa-fw"></label>
+                        <label class="col-sm-3 control-label">Title</label>
+                        <label class="col-sm-3 control-label">{{verification.title}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group" *ngIf="verification.type === 'private'">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.INITIALS_MATCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.INITIALS_MATCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Initials</label>
+                        <label class="col-sm-3 control-label">{{verification.initials}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group" *ngIf="verification.type === 'private'">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.NAME_MATCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.NAME_MATCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Surname</label>
+                        <label class="col-sm-3 control-label">{{verification.surname}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group" *ngIf="verification.type === 'business'">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.NAME_MATCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.NAME_MATCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Company Name</label>
+                        <label class="col-sm-3 control-label">{{verification.surname}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group" *ngIf="verification.type === 'private'">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ID_NUMBER_MATCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ID_NUMBER_MATCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">ID Number</label>
+                        <label class="col-sm-3 control-label">{{verification.id_number}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group" *ngIf="verification.type === 'business'">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ID_NUMBER_MATCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ID_NUMBER_MATCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Registration Number</label>
+                        <label class="col-sm-3 control-label">{{verification.id_number}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_FOUND === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_FOUND != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Bank</label>
+                        <label class="col-sm-3 control-label">{{verification.bank}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.RECV_BRANCH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.RECV_BRANCH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Branch</label>
+                        <label class="col-sm-3 control-label">{{verification.branch}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_TYPE_CORRECT === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_TYPE_CORRECT != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Account Type</label>
+                        <label class="col-sm-3 control-label">{{verification.account_type}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_FOUND === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_FOUND != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Account Number</label>
+                        <label class="col-sm-3 control-label">{{verification.account_number}}</label>
+                        <br/>
+                        <br/>
+                </div>
+        </fieldset>
+        <fieldset ng-hide="verification.status === 'Alert - Could Not Be Verified'">
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_OPEN === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_OPEN != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Account Currently Open</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_OPEN}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_DEBITS === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_DEBITS != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Account Debits</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_DEBITS}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_CREDITS === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_CREDITS != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label class="col-sm-3 control-label">Account Credits</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_CREDITS}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_LENGTH === 'Y'"
+                                class="col-sm-1 em fa fa-check fa-fw text-success"></label>
+                        <label *ngIf="(verification.status === 'successfully_verified' || verification.status === 'unable_to_verify') &amp;&amp; verification.ACC_LENGTH != 'Y'"
+                                class="col-sm-1 em fa fa-times fa-fw text-danger"></label>
+                        <label *ngIf="verification.status === 'pending' || verification.status === 'New'" class="col-sm-1 em fa fa-refresh fa-fw text-warning"></label>
+                        <label *ngIf="verification.status === 'new'" class="col-sm-1 em fa fa-spinner fa-fw text-success"></label>
+                        <label *ngIf="verification.status === 'data_error'" class="col-sm-1 em fa fa-exclamation fa-fw text-danger"></label>
+                        <label class="col-sm-3 control-label">Account Open 90 Days</label>
+                        <label class="col-sm-3 control-label">{{verification.ACC_LENGTH}}</label>
+                        <br/>
+                        <br/>
+                </div>
+        </fieldset>
+        <fieldset *ngIf="verification.callbackReq !== 'false'">
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Callback URL</label>
+                        <label class="col-sm-3 control-label">{{verification.callbackUrl}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Callback Date</label>
+                        <label class="col-sm-3 control-label">{{verification.callbackReq_date | date: "dd-MMM-yy hh:mm:ss"}}</label>
+                        <br/>
+                        <br/>
+                </div>
+                <div class="form-group">
+                        <label class="col-sm-3 control-label">Callback Response</label>
+                        <p class="col-sm-3">{{verification.callbackReq_detail}}</p>
+                        <br/>
+                        <br/>
+                </div>
+        </fieldset>
+        <fieldset>
+                <div class="form-group">
+                        <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-4"><a (click)="generatePdf()" class="button btn btn-block btn-success">Open as PDF</a>
+                                </div>
+                                <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
+                                </div>
+                                <div class="col-sm-2"></div>
+                        </div>
+                </div>
+        </fieldset>
+</div>

@@ -263,6 +263,16 @@ export class VerificationService {
     verification.created_date = new Date().getTime();
     return this.afs.collection('verifications_bank').add(verification);
   }
+  public createConsumerTraceBatch (batch) {
+    var batchMap =[]
+    batch.forEach(verification => {
+      verification.ref = this.generaterRef()
+      verification.status = 'new';
+      verification.created_date = new Date().getTime();
+      batchMap.push(this.afs.collection('verifications_consumer').add(verification));
+    }) 
+    return Promise.all(batchMap)
+  }
 
   public apiCall (endpoint: string, data: {}) {
     const idToken = this.userService.user ? this.userService.user.idToken : null;

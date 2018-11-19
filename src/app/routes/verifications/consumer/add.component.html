@@ -1,0 +1,257 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '6px' }"></ngx-loading>
+<div class="modal-body">
+    <tabset [justified]="true" type="pills">
+        <tab heading="Bulk Upload Trace" class="mt-2" (select)='verification = { "ref": ref}'>
+            <div *ngIf="lists|async as lsts$">
+                <section>
+                    <fieldset>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-6">
+                                <label for="file1" class="file-upload">
+                                    <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach
+                                        Documents</button>
+                                    <input type="file" multiple="" (change)="parse($event.target.files)">
+                                </label>
+                                <br />
+                                <br />
+                                <p *ngIf="!verifications" class="lead text-center">No supprting documents
+                                    attached...</p>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </fieldset>
+                </section>
+                <div class="form-group">
+                    <div class="col-sm-12" *ngIf="verifications" class="table-responsive fixed">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Second Name</th>
+                                    <th>Last Name</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                    <th>Date of Birth</th>
+                                    <th>ID Number</th>
+                                    <th>Death Status</th>
+                                    <th>Date of Death</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of verifications">
+                                    <td>{{item['First Name']}}</td>
+                                    <td>{{item['Second Name']}}</td>
+                                    <td>{{item['Last Name']}}</td>
+                                    <td>{{item['Gender']}}</td>
+                                    <td>{{item['Age']}}</td>
+                                    <td>{{item['Date of Birth']}}</td>
+                                    <td>{{item['ID Number']}}</td>
+                                    <td>{{item['Death Status']}}</td>
+                                    <td>{{item['Date of Death']}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a (click)="uploadBatch(verifications)" class="button btn btn-block btn-success">Upload
+                                Batch</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab>
+        <tab heading="Individual Trace" class="mt-2" (select)='verification = {"initials": " ", "ref": ref}'>
+            <div *ngIf="lists|async as lsts$">
+                <section>
+                    <fieldset>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Reference</label>
+                            <div class="col-sm-6">
+                                <h5>{{verification.ref}}</h5>
+                            </div>
+                            <div class="col-sm-2"></div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Company Name</label>
+                            <div class="col-sm-6">
+                                <input type="text" name="surname" [(ngModel)]="verification.surname" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Company Registartion Number</label>
+                            <div class="col-sm-6">
+                                <input type="phone" name="idNo" [(ngModel)]="verification.id_number" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Bank Name</label>
+                            <div class="col-sm-6">
+                                <select name="bank" [(ngModel)]="verification.bank" class="form-control">
+                                    <option *ngFor="let bank of lsts$?.banks">{{bank}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Type</label>
+                            <div class="col-sm-6">
+                                <select name="accType" [(ngModel)]="verification.account_type" class="form-control">
+                                    <option *ngFor="let account of lsts$?.accounts">{{account}}</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <br />
+                            <br />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Account Number</label>
+                            <div class="col-sm-3">
+                                <input type="phone" name="accNo" [(ngModel)]="verification.account_number" class="form-control" />
+                            </div>
+                            <label class="col-sm-1 control-label">Branch</label>
+                            <div class="col-sm-2">
+                                <input type="phone" name="branch" [(ngModel)]="verification.branch" class="form-control" />
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </fieldset>
+                </section>
+
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a class="button btn btn-block btn-success">Submit
+                                Verification</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab>
+    </tabset>
+    <!-- </tab> -->
+    <!-- <tab>
+            <ng-template tabHeading>Capture Batch</ng-template>
+            <div>
+                <fieldset>
+                    <br/>
+                    <br/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Investigation Type</label>
+                        <div class="col-sm-6">
+                            <select [(ngModel)]="verification.bulkType" class="form-control">
+                                <option *ngFor="let option of userVeriTpyes">{{option}}</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Notes</label>
+                        <div class="col-sm-6">
+                            <textarea placeholder="Add additional notes about this batch here.." rows="2" type="text" [(ngModel)]="verification.notes" class="form-control"></textarea>
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-6">
+                            <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="box-placeholder my-drop-zone text-center">
+                                    Drag and Drop Files Here to Attach Them...
+                            </div>
+                            <label for="file1" class="file-upload">
+                                <button class="btn btn-default btn-block"><i class="fa fa-folder-o"></i> Attach Documents</button>
+                                <input id="file1" type="file" ng2FileSelect [uploader]="uploader" multiple />
+                            </label>
+                            <br/>
+                            <br/>
+                            <p *ngIf="!uploader?.queue?.length" class="lead text-center">No batch file loaded yet...</p>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                    <div *ngIf="uploader?.queue?.length > 0" >
+                        {{uploader.queue.length}}
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-10">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Member Number</th>
+                                        <th>Title</th>
+                                        <th>Initials</th>
+                                        <th>Surname</th>
+                                        <th>ID Number</th>
+                                        <th>Bank Name</th>
+                                        <th>Branch</th>
+                                        <th>Account Type</th>
+                                        <th>Account Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in verification.fileData.Sheet1">
+                                        <td>
+                                            ** item['Member_Number'] ++</td>
+                                        <td>
+                                            ** item['Title'] ++</td>
+                                        <td>
+                                            ** item['Initials'] ++</td>
+                                        <td>
+                                            ** item['Surname'] ++</td>
+                                        <td>
+                                            ** item['ID_Number'] ++</td>
+                                        <td>
+                                            ** item['Bank_Name'] ++</td>
+                                        <td>
+                                            ** item['Branch'] ++</td>
+                                        <td>
+                                            ** item['Account_Type'] ++</td>
+                                        <td>
+                                            ** item['Account_Number'] ++</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><a (click)="addBatchSubmit()" class="button btn btn-block btn-success">Submit Batch</a>
+                        </div>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </fieldset>
+            </div>
+        </tab> -->
+    <!-- </tabset> -->
+</div>

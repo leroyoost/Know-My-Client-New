@@ -6,12 +6,12 @@ import { SharedModule } from '../../shared/shared.module';
 // Modules
 import { FullModule } from './full/full.module';
 import { BankModule } from './bank/bank.module';
-// import { TraceModule } from './trace/trace.module';
+import { ConsumerModule } from './consumer/consumer.module';
 
 // Components
 import { FullComponent } from './full/full.component';
 import { BankComponent } from './bank/bank.component';
-// import { TraceComponent } from './trace/trace.component';
+import { ConsumerComponent } from './consumer/consumer.component';
 
 // Services
 import { VerificationService } from './verifications.service';
@@ -19,8 +19,9 @@ import { PdfService } from './pdf.service';
 const routes: Routes = [
   { path: '', redirectTo: 'app/verification/full', pathMatch: 'full' },
   { path: 'full', component: FullComponent },
-  { path: 'bank', component: BankComponent }
-  // { path: 'trace', component: TraceComponent }
+  { path: 'bank', component: BankComponent },
+  { path: 'consumer', component: ConsumerComponent }
+
 ];
 
 @NgModule({
@@ -29,7 +30,7 @@ const routes: Routes = [
     SharedModule,
     FullModule,
     BankModule,
-    // TraceModule,
+    ConsumerModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
