@@ -106,13 +106,13 @@ export class VerificationService {
   }
 
   public getVerifications(veriType): Observable<any> {
+    console.log('getVerifications')
     return new Observable((observer) => {
       this.auth.auth.onAuthStateChanged(user => {
         if (user) {
           this.afs.collection('users').doc(user.uid).valueChanges().subscribe((response: any) => {
             this.afs.collection(veriType).valueChanges().subscribe(verifications => {
-              console.log(verifications);
-              observer.next(verifications);
+                observer.next(verifications);
             });
           }, err => {
             console.log(err);
@@ -265,7 +265,9 @@ export class VerificationService {
   }
   public createConsumerTraceBatch (batch) {
     var batchMap =[]
+    const batchNo = this.generaterRef()
     batch.forEach(verification => {
+      verification.batch = batchNo
       verification.ref = this.generaterRef()
       verification.status = 'new';
       verification.created_date = new Date().getTime();

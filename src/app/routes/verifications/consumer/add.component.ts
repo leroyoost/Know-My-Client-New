@@ -75,7 +75,8 @@ export class AddComponent implements OnInit {
                 this.verifications = result.data
                 console.log(this.verifications)
             },
-            header: true
+            header: true,
+            
         });
       }
     }

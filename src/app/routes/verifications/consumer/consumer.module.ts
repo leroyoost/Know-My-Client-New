@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConsumerComponent } from './consumer.component';
 import { AddComponent } from './add.component';
+import { ExportComponent } from './export.component';
 import { DetailsComponent } from './details.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { PapaParseModule } from 'ngx-papaparse';
@@ -15,11 +16,13 @@ import { PapaParseModule } from 'ngx-papaparse';
   declarations: [
     AddComponent,
     DetailsComponent,
-    ConsumerComponent
+    ConsumerComponent,
+    ExportComponent
   ],
   entryComponents: [
     AddComponent,
-    DetailsComponent
+    DetailsComponent,
+    ExportComponent
   ]
 })
 export class ConsumerModule { }

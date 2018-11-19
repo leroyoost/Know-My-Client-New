@@ -1,0 +1,16 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '6px' }"></ngx-loading>
+<div class="modal-body">
+
+
+    <fieldset>
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4"><a (click)="exportRecords(verifications)" class="button btn btn-block btn-success">Upload
+                    Batch</a>
+            </div>
+            <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </fieldset>
+</div>

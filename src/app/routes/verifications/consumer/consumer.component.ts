@@ -4,6 +4,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { UserService } from '../../../core/user/user.service';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AddComponent } from './add.component';
+import { ExportComponent } from './export.component';
 import { DetailsComponent } from './details.component';
 import { Verification } from '../../../shared/models/verification';
 import { ModalConfig } from '../../../shared/models/modal';
@@ -20,6 +21,7 @@ export class ConsumerComponent implements OnInit {
   verifications: Observable<{}>;
   DetailsModalRef: BsModalRef;
   AddModalRef: BsModalRef;
+  ExportModalRef: BsModalRef;
   loading = false;
   constructor(
     private verificationService: VerificationService,
@@ -29,6 +31,14 @@ export class ConsumerComponent implements OnInit {
 
   public addModal() {
     this.AddModalRef = this.modalService.show(AddComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
+  }
+
+  public exportModal() {
+    this.verificationService.getVerifications('verifications_consumer').subscribe(res => {
+      console.log(res)
+      this.ExportModalRef = this.modalService.show(ExportComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
+      this.ExportModalRef.content.verifications = res
+    })
   }
 
   public detailsModal(verification: Verification) {
