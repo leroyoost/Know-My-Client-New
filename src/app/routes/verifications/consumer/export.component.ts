@@ -6,7 +6,7 @@ import { SettingsService } from '../../../core/settings/settings.service';
 import { Observable } from 'rxjs/Observable';
 import * as _ from 'lodash';
 import { Papa } from 'ngx-papaparse';
-import { FileSaverService } from 'ngx-filesaver';
+//import { FileSaverService } from 'ngx-filesaver';
 
 declare var require: any;
 const swal = require('sweetalert');
@@ -36,16 +36,16 @@ export class ExportComponent implements OnInit {
     private userService: UserService,
     private settings: SettingsService,
     private papa: Papa,
-    private _FileSaverService: FileSaverService
+    //private _FileSaverService: FileSaverService
   ) {
     console.log('ExportConsumerComponent Lanuched');
   }
 
   public exportRecords(verifications){
     const fileName = `save.csv`;
-    const fileType = this._FileSaverService.genType(fileName);
-    const txtBlob = new Blob([this.papa.unparse(verifications)], { type: fileType });
-    this._FileSaverService.save(txtBlob, fileName);
+    //const fileType = this._FileSaverService.genType(fileName);
+    //const txtBlob = new Blob([this.papa.unparse(verifications)], { type: fileType });
+    //this._FileSaverService.save(txtBlob, fileName);
   }
 
   ngOnInit() {

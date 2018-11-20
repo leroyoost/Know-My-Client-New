@@ -3,13 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { SettingsService } from '../../core/settings/settings.service';
 import { UserService } from '../../core/user/user.service';
-import { AngularFirestore } from 'angularfire2/firestore';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Verification } from '../../shared/models/verification';
 import { Upload } from '../../shared/models/verification';
 import * as firebase from 'firebase/app'; // for typings
-import { FirebaseApp } from 'angularfire2'; // for
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 import * as _ from 'lodash';

@@ -4,7 +4,7 @@ import { SettingsService } from '../../core/settings/settings.service';
 import { AddCompanyComponent } from './companies/add/company-add-modal.component';
 import { AddListsComponent } from './lists/lists-add-modal.component';
 
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs/Observable';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
