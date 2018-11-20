@@ -5,7 +5,7 @@ import { Verification } from '../../../shared/models/verification';
 import { UserService } from '../../../core/user/user.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { VerificationService } from '../verifications.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 declare var require: any;
 const swal = require('sweetalert');

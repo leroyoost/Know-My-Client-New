@@ -4,7 +4,7 @@ import { FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angula
 import { Router } from '@angular/router';
 import { CustomValidators } from 'ng2-validation';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 
 @Component({

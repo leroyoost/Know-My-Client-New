@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ConfigService } from '../../config.service';
 import { SettingsService } from '../../../../core/settings/settings.service';
 import { Company } from '../../../../shared/models/company';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as _ from 'underscore';
 
 

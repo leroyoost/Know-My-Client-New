@@ -7,7 +7,7 @@ import { Verification } from '../../../shared/models/verification';
 import { VerificationService } from '../verifications.service';
 import { UserService } from '../../../core/user/user.service';
 import { ModalConfig } from '../../../shared/models/modal';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
   @Component({
       selector: 'app-details-modal',
       templateUrl: './details.component.html',

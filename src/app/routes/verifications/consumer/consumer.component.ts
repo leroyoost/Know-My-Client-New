@@ -8,7 +8,7 @@ import { ExportComponent } from './export.component';
 import { DetailsComponent } from './details.component';
 import { Verification } from '../../../shared/models/verification';
 import { ModalConfig } from '../../../shared/models/modal';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 
 @Component({

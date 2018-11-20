@@ -2,7 +2,8 @@ import { Injectable} from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection, AssociatedReference } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+
 import * as firebase from 'firebase/app';
 
 declare var $: any;

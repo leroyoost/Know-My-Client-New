@@ -7,7 +7,7 @@ import { DetailsComponent } from './details.component';
 import { AddComponent } from './add.component';
 import { Verification } from '../../../shared/models/verification';
 import { ModalConfig } from '../../../shared/models/modal';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-full',

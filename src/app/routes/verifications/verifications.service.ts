@@ -9,7 +9,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Verification } from '../../shared/models/verification';
 import { Upload } from '../../shared/models/verification';
 import * as firebase from 'firebase/app'; // for typings
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 import * as _ from 'lodash';
 

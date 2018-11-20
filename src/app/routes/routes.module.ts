@@ -2,7 +2,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { VerificationsModule } from './verifications/verifications.module';
 
 // Components
 import { LoginComponent } from './login/login.component';
@@ -29,8 +28,8 @@ import { routes } from './routes';
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forRoot(routes),
-        VerificationsModule
+        RouterModule.forRoot(routes)
+        
     ],
     declarations: [
       LoginComponent,

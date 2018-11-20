@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { VerificationService } from '../verifications.service';
 import { UserService } from '../../../core/user/user.service';
 import { SettingsService } from '../../../core/settings/settings.service';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { Papa } from 'ngx-papaparse';
 

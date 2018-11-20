@@ -5,7 +5,7 @@ import { AddCompanyComponent } from './companies/add/company-add-modal.component
 import { AddListsComponent } from './lists/lists-add-modal.component';
 
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import * as firebase from 'firebase';

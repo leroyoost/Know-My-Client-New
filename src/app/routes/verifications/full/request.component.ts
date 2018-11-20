@@ -6,7 +6,7 @@ import { VerificationService } from '../verifications.service';
 import { PdfService } from '../pdf.service';
 import { UserService } from '../../../core/user/user.service';
 import { ModalConfig } from '../../../shared/models/modal';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as _ from 'underscore';
 @Component({
   selector: 'app-request-modal',

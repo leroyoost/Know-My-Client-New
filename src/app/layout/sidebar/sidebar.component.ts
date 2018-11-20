@@ -1,6 +1,6 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 declare var $: any;
 
 import { MenuService } from '../../core/menu/menu.service';

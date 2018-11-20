@@ -1,15 +1,15 @@
 import { Injectable, Component} from '@angular/core';
 import { AngularFirestore} from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import { User } from '../../shared/models/user';
 import { UserService } from '../../core/user/user.service';
 
 @Injectable()
 export class UsersService {
-    user: Observable<firebase.User>;
-    userList: Observable<User[]>;
+    user: any
+    userList: any
     loading = false;
     constructor(
         public afs: AngularFirestore,

@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { UsersService } from '../users.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { User } from '../../../shared/models/user';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { SideMenu} from '../../../shared/models/sidemenu';
 declare var require: any;
 const swal = require('sweetalert');
