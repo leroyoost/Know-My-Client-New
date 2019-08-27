@@ -11,7 +11,7 @@ import { Upload } from '../../shared/models/verification';
 import * as firebase from 'firebase/app'; // for typings
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
-import * as _ from 'lodash';
+import * as _ from 'underscore';
 
 
 @Injectable()

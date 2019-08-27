@@ -17,8 +17,7 @@
                                 </label>
                                 <br />
                                 <br />
-                                <p *ngIf="!verifications" class="lead text-center">No supprting documents
-                                    attached...</p>
+                                <p *ngIf="!verifications" class="lead text-center">Select File to Upload Batch</p>
                             </div>
                             <div class="col-sm-3"></div>
                         </div>
@@ -55,7 +54,7 @@
                         <div class="col-sm-4"><a (click)="uploadBatch(verifications)" class="button btn btn-block btn-success">Upload
                                 Batch</a>
                         </div>
-                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Cancel</a>
+                        <div class="col-sm-4"><a (click)="bsModalRef.hide()" class="button btn btn-block btn-danger">Close</a>
                         </div>
                         <div class="col-sm-2"></div>
                     </div>

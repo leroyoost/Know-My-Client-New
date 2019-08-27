@@ -5,7 +5,7 @@ import { VerificationService } from '../verifications.service';
 import { UserService } from '../../../core/user/user.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { Observable } from 'rxjs';
-import * as _ from 'lodash';
+import * as _ from 'underscore';
 import { Papa } from 'ngx-papaparse';
 
 declare var require: any;

@@ -33,13 +33,10 @@ export class ConsumerComponent implements OnInit {
     this.AddModalRef = this.modalService.show(AddComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
   }
 
-  public exportModal() {
-    this.verificationService.getVerifications('verifications_consumer').subscribe(res => {
-      console.log(res)
+  public exportModal(data) {
       this.ExportModalRef = this.modalService.show(ExportComponent, Object.assign({}, ModalConfig, {class: 'modal-lg'}));
-      this.ExportModalRef.content.verifications = res
-    })
-  }
+      this.ExportModalRef.content.verifications = data;
+    }
 
   public detailsModal(verification: Verification) {
       console.log('deatilsModal Launched');

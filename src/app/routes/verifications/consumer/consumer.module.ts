@@ -6,14 +6,14 @@ import { ExportComponent } from './export.component';
 import { DetailsComponent } from './details.component';
 import { SharedModule } from '../../../shared/shared.module';
 import { PapaParseModule } from 'ngx-papaparse';
-//import { FileSaverModule } from 'ngx-filesaver';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     PapaParseModule,
-    //FileSaverModule
+    FileSaverModule
   ],
   declarations: [
     AddComponent,

@@ -13,7 +13,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">Date Created</label>
-                    <label class="col-sm-6 control-label">{{verification.created_date | date: "dd-MMM-yyyy H:mm"}}</label>
+                    <label class="col-sm-6 control-label">{{verification.created_date  | date: "dd-MMM-yyyy H:mm"}}</label>
                     <br/>
                     <br/>
                 </div>
@@ -100,7 +100,7 @@
                                     <tr>
                                         <td>{{event?.secondary}}</td>
                                         <td width="20%">
-                                            <div class="text text-muted">{{event?.created | date: "dd-MMM-yy"}}</div>
+                                            <div class="text text-muted">{{event?.created  | date: "dd-MMM-yy"}}</div>
                                         </td>
                                     </tr>
                                 </div>
@@ -121,7 +121,7 @@
                                     <td> <a target="_blank" href="{{file?.fileUrl}}">{{file?.fileType}}</a></td>
                                     <td>{{file?.fileName}}</td>
                                     <td width="20%">
-                                        <div class="text text-muted">{{file?.created | date: "dd-MMM-yy"}}</div>
+                                        <div class="text text-muted">{{file?.created  | date: "dd-MMM-yy"}}</div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -146,7 +146,7 @@
                                     {{event.heading}}
                                     <span class="pull-right"></span>
                                     <span class="pull-right"> {{event.created | amTimeAgo}})</span>
-                                    <span class="pull-right">{{event.created | date: "dd-MMM-yy H:mm"}} (</span>
+                                    <span class="pull-right">{{event.created  | date: "dd-MMM-yy H:mm"}} (</span>
                                 </h4>
                                 <div class="arrow"></div>
                                 <div class="popover-content">

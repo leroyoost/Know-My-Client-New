@@ -6,7 +6,7 @@ import { UserService } from '../../../core/user/user.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { VerificationService } from '../verifications.service';
 import { Observable } from 'rxjs';
-import * as _ from 'lodash';
+import * as _ from 'underscore';
 declare var require: any;
 const swal = require('sweetalert');
 

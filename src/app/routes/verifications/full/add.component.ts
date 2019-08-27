@@ -7,7 +7,7 @@ import { Verification, Upload } from '../../../shared/models/verification';
 import { UserService } from '../../../core/user/user.service';
 import { SettingsService } from '../../../core/settings/settings.service';
 import { Observable } from 'rxjs';
-import * as _ from 'lodash';
+import * as _ from 'underscore';
 import { Address } from 'angular-google-place';
 declare var require: any;
 const swal = require('sweetalert');

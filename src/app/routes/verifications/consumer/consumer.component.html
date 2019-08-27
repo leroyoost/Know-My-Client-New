@@ -8,7 +8,7 @@
                 Add New</button>
         </div>
         <div class="col-sm-3 col-xs-3">
-            <button type="button" class="btn btn-primary btn-block align-middle" (click)="exportModal()"><i class="fa fa-file-excel-o"></i>
+            <button type="button" class="btn btn-primary btn-block align-middle" (click)="exportModal(verifications)"><i class="fa fa-file-excel-o"></i>
                 Export</button>
         </div>
     </div>
@@ -27,14 +27,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of verifications | async | orderBy: '-created_date'" (click)="detailsModal(item)">
+                <tr *ngFor="let item of verifications | async | orderBy: '-created_date'" >
                     <td>{{item.batch}}
                     <td>{{item.ref}}
                     <td>{{item['First Name']}}</td>
                     <td>{{item['Last Name']}}</td>
                     <td>{{item['Identity Number']}}</td>
-                    <td>{{item.created_date | date: "dd-MMM-yyyy H:mm"}}</td>
-                    <td>{{item.updated_date | date: "dd-MMM-yyyy H:mm"}}</td>
+                    <td>{{item.created_date| date: "dd-MMM-yyyy H:mm"}}</td>
+                    <td>{{item.updated_date?.seconds * 1000  | date: "dd-MMM-yyyy H:mm"}}</td>
                     <td>{{item.status | cleanKey}}</td>
                 </tr>
             </tbody>
